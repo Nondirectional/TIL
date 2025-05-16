@@ -1,10 +1,12 @@
 # WSL 环境搭建
 
-将安装如下容器
+在WSL环境下使用Docker Compose安装和配置以下开发容器：
 
-- postgres
-- elasticsearch
-- kibana
+- postgres: 用于数据持久化存储的关系型数据库，使用pgvector扩展支持向量检索
+- elasticsearch: 分布式搜索和分析引擎，用于全文检索和数据分析
+- kibana: elasticsearch的可视化管理界面，用于数据展示和集群管理
+
+这些容器将通过docker-compose编排工具进行统一管理，并配置相应的持久化存储和网络连接。
 
 
 
