@@ -24,8 +24,6 @@ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/
 
 # for linux
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
-# for legacy win-64
-conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/peterjc123/
 # 以上两条是Pytorch的Anaconda第三方镜像
 
 conda config --set show_channel_urls yes
