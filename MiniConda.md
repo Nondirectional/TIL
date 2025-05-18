@@ -10,6 +10,26 @@ wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-py39_4.9
 bash Miniconda3-py39_4.9.2-Linux-x86_64.sh
 ```
 
+### 安装注意事项
+
+conda的init只初始化了bash，如果使用的shell是zsh需要在~/.zshrc 末尾添加以下从conda安装并初始化后从~/.bashrc复制的内容：
+```shell
+# >>> conda initialize >>> 
+# !! Contents within this block are managed by 'conda init' !! 
+__conda_setup="$('/data/tools/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)" 
+if [ $? -eq 0 ]; then 
+    eval "$__conda_setup" 
+else 
+    if [ -f "/data/tools/miniconda3/etc/profile.d/conda.sh" ]; then 
+        . "/data/tools/miniconda3/etc/profile.d/conda.sh" 
+    else 
+        export PATH="/data/tools/miniconda3/bin:$PATH" 
+    fi 
+fi 
+unset __conda_setup 
+# <<< conda initialize <<<
+```
+
 ## 使用指南
 
 ### 配置清华软件源

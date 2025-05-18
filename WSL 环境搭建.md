@@ -45,6 +45,9 @@ http.cors.allow-origin: "*"
 http.cors.allow-headers: Authorization
 # 开启安全控制
 xpack.security.enabled: true
+# 启用 API 密钥认证
+xpack.security.authc.api_key.enabled: true
+# 启用 Transport 层安全
 xpack.security.transport.ssl.enabled: true
 ```
 
