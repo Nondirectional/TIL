@@ -4,8 +4,8 @@
 
 **第一阶段：Python基础语法 (建议用时：2-4周)**
 
-* [x] 理解变量的概念和命名规则
-* [ ] 学习并掌握数字类型：整数 (`int`) 和浮点数 (`float`)
+* [x] [理解变量的概念和命名规则](#变量的概念与命名规则)
+* [x] 学习并掌握数字类型：整数 (`int`) 和浮点数 (`float`)
 * [ ] 学习并掌握字符串类型 (`str`)
 * [ ] 学习并掌握布尔类型 (`bool`)
 * [ ] 掌握不同数据类型之间的转换方法
@@ -170,7 +170,7 @@
 
 ## 变量的概念与命名规则
 
-### 变量的概念 (Concept of Variables)
+### 变量的概念
 
 想象一下，你在做一个数学题，需要用到一个数字，比如圆周率 $\\pi \\approx 3.14159$。你不会每次用到它的时候都把这一长串数字写一遍，而是可能会用一个符号，比如 "pi"，来代表这个数字。在程序中，**变量 (Variable)** 就扮演着类似的角色。
 
@@ -218,7 +218,7 @@ count = count + 5  # 现在 count 存储的是 15
     ```
   * **变量只是一个引用：** 变量名本身不包含数据，它只是指向数据在内存中的位置。这有点像你有一个朋友的地址，地址本身不是你朋友，但通过地址你可以找到他。
 
-### 变量的命名规则 (Naming Rules for Variables)
+### 变量的命名规则
 
 给变量起一个好名字非常重要，它能让你的代码更容易阅读和理解。Python对变量名有一些强制性的规则和一些约定俗成的规范。
 
@@ -280,6 +280,479 @@ count = count + 5  # 现在 count 存储的是 15
   * 命名时**推荐**遵守：见名知意；使用蛇形命名法 (如 `my_variable`)；保持简洁和一致性；避免覆盖内置函数名。
 
 理解并遵循这些概念和规则，将帮助你编写出更清晰、更易于维护的Python代码。
+
+## 整数 (int) 与浮点数 (float)
+
+### 1. 什么是整数 (int) 和浮点数 (float)
+
+在 Python 中，数字类型用于表示数值。最常用的两种数字类型是：
+
+- **整数 (Integer, `int`)**: 表示不带小数点的正数、负数或零。例如：-2, 0, 10, 1000000。在 Python 3 中，整数的大小是**没有限制**的，只受限于你的计算机内存。
+- **浮点数 (Floating-Point Number, `float`)**: 表示带小数点的数字。例如：3.14, -0.001, 2.0, 1.23e5 (科学计数法，表示 1.23 x 10^5^)。浮点数通常用于表示实数，但它们在计算机内部的表示方式决定了可能存在**精度问题**。
+
+------
+
+### 2. 如何定义和使用它们
+
+直接赋值即可创建整数和浮点数变量：
+
+```python
+# 定义整数
+age = 30
+year = -2023
+big_number = 12345678901234567890 # Python 3 整数没有大小限制
+
+print(f"age 的类型是: {type(age)}")
+print(f"year 的类型是: {type(year)}")
+print(f"big_number 的类型是: {type(big_number)}")
+
+# 定义浮点数
+pi = 3.14159
+temperature = -4.5
+speed = 3.0 # 即使是整数值，加上小数点就变成了浮点数
+scientific = 1.5e-3 # 表示 1.5 * 10^(-3) = 0.0015
+
+print(f"\npi 的类型是: {type(pi)}")
+print(f"temperature 的类型是: {type(temperature)}")
+print(f"speed 的类型是: {type(speed)}")
+print(f"scientific 的类型是: {type(scientific)}")
+```
+
+**注意**: `type()` 函数可以帮助你查看任何变量的数据类型。
+
+------
+
+### 3. 基本算术运算
+
+整数和浮点数都支持标准的算术运算符：
+
+| **运算符** | **名称**    | **示例 (int)** | **结果 (int)** | **示例 (float)** | **结果 (float)** |
+| ---------- | ----------- | -------------- | -------------- | ---------------- | ---------------- |
+| `+`        | 加法        | `5 + 3`        | `8`            | `5.0 + 3.0`      | `8.0`            |
+| `-`        | 减法        | `5 - 3`        | `2`            | `5.0 - 3.0`      | `2.0`            |
+| `*`        | 乘法        | `5 * 3`        | `15`           | `5.0 * 3.0`      | `15.0`           |
+| `/`        | 除法        | `10 / 3`       | `3.333...`     | `10.0 / 3.0`     | `3.333...`       |
+| `%`        | 取模 (余数) | `10 % 3`       | `1`            | `10.0 % 3.0`     | `1.0`            |
+| `//`       | 整除        | `10 // 3`      | `3`            | `10.0 // 3.0`    | `3.0`            |
+| `**`       | 幂运算      | `2 ** 3`       | `8`            | `2.0 ** 3.0`     | `8.0`            |
+
+**重要**:
+
+- 在 Python 3 中，无论操作数是整数还是浮点数，`/` 除法的结果**总是**浮点数。
+- `//` 整除运算符会丢弃小数部分，结果的类型取决于操作数的类型：如果都是整数，结果是整数；如果至少有一个是浮点数，结果是浮点数（但值是整除后的整数部分）。
+
+
+
+```python
+# 整数运算
+a = 10
+b = 3
+
+print(f"\n整数运算:")
+print(f"a + b = {a + b}")
+print(f"a - b = {a - b}")
+print(f"a * b = {a * b}")
+print(f"a / b = {a / b} (注意这里是浮点数结果)")
+print(f"a % b = {a % b}")
+print(f"a // b = {a // b}")
+print(f"a ** b = {a ** b}")
+
+# 浮点数运算
+c = 10.0
+d = 3.0
+
+print(f"\n浮点数运算:")
+print(f"c + d = {c + d}")
+print(f"c - d = {c - d}")
+print(f"c * d = {c * d}")
+print(f"c / d = {c / d}")
+print(f"c % d = {c % d}")
+print(f"c // d = {c // d} (浮点数的整除结果也是浮点数)")
+print(f"c ** d = {c ** d}")
+```
+
+------
+
+### 4. 类型转换 (Casting)
+
+你可以使用内置函数在整数和浮点数之间进行转换：
+
+- `int(x)`: 将 `x` 转换为整数。如果 `x` 是浮点数，它会**截断**小数部分（直接去掉，而不是四舍五入）。如果 `x` 是字符串，它必须是合法的整数表示。
+- `float(x)`: 将 `x` 转换为浮点数。如果 `x` 是整数，它会加上 `.0`。如果 `x` 是字符串，它必须是合法的数字表示（整数或浮点数）。
+
+
+
+```python
+# int 转 float
+num_int = 100
+num_float = float(num_int)
+print(f"\nint 转 float: {num_int} -> {num_float}, type: {type(num_float)}")
+
+# float 转 int (截断)
+num_float2 = 123.789
+num_int2 = int(num_float2)
+print(f"float 转 int (截断): {num_float2} -> {num_int2}, type: {type(num_int2)}")
+
+# float 转 int (另一个例子)
+num_float3 = -4.9
+num_int3 = int(num_float3)
+print(f"float 转 int (截断): {num_float3} -> {num_int3}, type: {type(num_int3)}") # 注意，是向零的方向截断
+
+# 字符串转数字
+str_int = "123"
+str_float = "45.67"
+
+try:
+    int_from_str = int(str_int)
+    float_from_str = float(str_float)
+    print(f"字符串转 int: \"{str_int}\" -> {int_from_str}, type: {type(int_from_str)}")
+    print(f"字符串转 float: \"{str_float}\" -> {float_from_str}, type: {type(float_from_str)}")
+
+    # 尝试转换非数字字符串会导致 ValueError
+    # invalid_str = "hello"
+    # int(invalid_str) # 这行会报错
+except ValueError as e:
+    print(f"转换错误: {e}")
+```
+
+------
+
+### 5. int 和 float 混合运算
+
+当一个整数和一个浮点数进行运算时，Python 会自动将整数**提升**为浮点数，然后再进行计算。结果将是浮点数。
+
+Python
+
+```
+result_mixed = 5 + 3.14
+print(f"\nint 和 float 混合运算: 5 + 3.14 = {result_mixed}, type: {type(result_mixed)}")
+
+result_mixed2 = 10 * 2.5
+print(f"int 和 float 混合运算: 10 * 2.5 = {result_mixed2}, type: {type(result_mixed2)}")
+
+result_mixed3 = 10 / 2 # 即使整除，结果也是 float
+print(f"int 和 int / float: 10 / 2 = {result_mixed3}, type: {type(result_mixed3)}")
+
+result_mixed4 = 10 // 3.0 # 整除，但有一个是 float，结果是 float
+print(f"int // float: 10 // 3.0 = {result_mixed4}, type: {type(result_mixed4)}")
+```
+
+这种自动类型提升是很方便的，但你需要注意最终结果的数据类型。
+
+------
+
+### 6. 浮点数精度问题
+
+这是掌握 `float` 时非常重要的一个概念。由于计算机使用二进制来表示浮点数，而许多十进制小数（如 0.1, 0.2）在二进制下是无限循环的，无法精确表示。这会导致微小的舍入误差。
+
+Python
+
+```
+print(f"\n浮点数精度问题:")
+print(0.1 + 0.2) # 结果不是精确的 0.3
+print(0.1 + 0.2 == 0.3) # 结果是 False
+
+# 另一个例子
+print(1 / 3)
+print(1 / 3 * 3) # 结果可能不是精确的 1.0
+```
+
+**为什么会这样？**
+
+就像十进制无法精确表示 1/3 (0.333...) 一样，许多十进制小数在二进制下也是无限循环的。计算机只能存储有限的位数，所以会进行截断或舍入，从而产生微小的误差。
+
+**什么时候需要注意？**
+
+- 进行**精确**的金融计算时。
+- 进行比较相等性 (`==`) 时，浮点数的相等性比较通常需要小心，最好比较它们的差是否在一个很小的范围内 (`abs(a - b) < epsilon`)。
+
+**解决方案 (了解即可)**
+
+对于需要高精度计算的场景，可以使用 Python 标准库中的 `decimal` 模块，它可以提供任意精度的十进制浮点运算。但对于大多数科学计算或日常用途，标准的 `float` 已经足够。
+
+------
+
+### 7. 常用内置函数
+
+除了上面提到的 `type()`, `int()`, `float()`，还有一些常用的内置函数用于数字操作：
+
+- `abs(x)`: 返回 `x` 的绝对值。
+
+- `round(x, n=None)`: 对 `x`进行四舍五入。
+- 如果 `n` 被省略，返回最接近的整数（但结果是浮点数，如 `round(3.14)` 返回 `3.0`，`round(3.5)` 返回 `4.0`）。
+   - 如果指定 `n`，则四舍五入到小数点后 `n` 位。
+- **注意**: Python 3 的 `round()` 函数在处理 `.5` 的情况下，遵循「银行家舍入」（round half to even）的规则，即当小数部分恰好是 0.5 时，会舍入到最近的偶数整数。例如 `round(2.5)` 是 `2.0`，`round(3.5)` 是 `4.0`。
+
+```python
+print(f"\n常用内置函数:")
+print(f"abs(-10) = {abs(-10)}")
+print(f"abs(-5.5) = {abs(-5.5)}")
+
+print(f"round(3.14159) = {round(3.14159)}")
+print(f"round(3.14159, 2) = {round(3.14159, 2)}")
+print(f"round(3.5) = {round(3.5)}")   # 银行家舍入
+print(f"round(2.5) = {round(2.5)}")   # 银行家舍入
+print(f"round(4.789, 1) = {round(4.789, 1)}")
+```
+
+好的，让我们深入学习 Python 的字符串类型 (`str`)。字符串是 Python 中最常用的数据类型之一，用于表示文本数据。
+
+---
+
+## 字符串( str )
+
+### 1\. 什么是字符串 (str)
+
+字符串是一个由零个或多个字符组成的序列。字符可以是字母、数字、符号、空格等等。在 Python 中，字符串是**不可变 (immutable)** 的序列。这意味着一旦创建了一个字符串对象，就不能更改它里面的单个字符。任何看起来像修改字符串的操作，实际上都是创建了一个新的字符串对象。
+
+### 2\. 如何创建字符串
+
+可以使用单引号 (`'`)、双引号 (`"`)、三单引号 (`'''`) 或三双引号 (`"""`) 来创建字符串。
+
+  * **单引号或双引号**: 用于创建单行字符串。通常建议在整个项目中统一使用其中一种风格。
+
+    ```python
+    string1 = 'Hello, World!'
+    string2 = "Python Programming"
+    print(type(string1))
+    print(type(string2))
+    ```
+
+    如果字符串本身包含单引号或双引号，可以使用另一种引号来包围它，或者使用转义字符 (`\`)。
+
+    ```python
+    quote1 = "He said, 'Hello!'"
+    quote2 = 'It\'s a beautiful day.' # 使用反斜杠转义单引号
+    quote3 = "She said, \"Wow!\""  # 使用反斜杠转义双引号
+    print(quote1)
+    print(quote2)
+    print(quote3)
+    ```
+
+  * **三单引号或三双引号**: 用于创建多行字符串。它们可以跨越多行，并且会保留原始字符串中的换行符和缩进。
+
+    ```python
+    multiline_string = """This is a
+    multiline string.
+    It preserves
+    line breaks and
+    indentation."""
+    print(multiline_string)
+    
+    multiline_string2 = '''Another
+    multiline
+    string.'''
+    print(multiline_string2)
+    ```
+
+### 3\. 字符串的不可变性
+
+这是字符串的一个重要特性。你不能修改一个已存在的字符串对象中的某个字符。
+
+```python
+my_string = "Python"
+# my_string[0] = "J" # 这行代码会引发 TypeError 错误，因为字符串不可变
+
+# 如果想改变，必须创建一个新的字符串
+new_string = "Jython" # 创建了一个新的字符串对象
+print(my_string)
+print(new_string)
+
+# 看起来像修改的操作，实际上是重新赋值 (创建新对象)
+greeting = "Hello"
+greeting = greeting + ", World!" # 创建了一个新的字符串 "Hello, World!"，并让 greeting 变量指向它
+print(greeting)
+```
+
+### 4\. 访问字符串中的字符 (索引)
+
+字符串中的每个字符都有一个对应的位置编号，称为**索引 (index)**。索引从 0 开始。你也可以使用负数索引，它从字符串的末尾开始计数，-1 表示最后一个字符，-2 表示倒数第二个字符，以此类推。
+
+```python
+word = "Example"
+# 索引: E=0, x=1, a=2, m=3, p=4, l=5, e=6
+# 负索引: E=-7, x=-6, a=-5, m=-4, p=-3, l=-2, e=-1
+
+print(f"第一个字符: {word[0]}")
+print(f"第三个字符: {word[2]}")
+print(f"最后一个字符: {word[-1]}")
+print(f"倒数第三个字符: {word[-3]}")
+
+# 尝试访问超出范围的索引会导致 IndexError 错误
+# print(word[10])
+# print(word[-10])
+```
+
+### 5\. 字符串切片 (Slicing)
+
+切片允许你从字符串中提取一部分作为子字符串。语法是 `[start:stop:step]`。
+
+  * `start`: 切片的起始索引（包含此索引处的字符）。如果省略，默认为 0。
+  * `stop`: 切片的结束索引（**不包含**此索引处的字符）。如果省略，默认为字符串的末尾。
+  * `step`: 切片的步长（跳跃的间隔）。如果省略，默认为 1。步长可以是负数，用于反向切片。
+
+```python
+phrase = "Python Slicing"
+# 索引: P=0, y=1, t=2, h=3, o=4, n=5, ' '=6, S=7, l=8, i=9, c=10, i=11, n=12, g=13
+
+print(f"\n原始字符串: {phrase}")
+print(f"从索引 0 到 6 (不包含 6): {phrase[0:6]}") # Python
+print(f"从索引 7 到末尾: {phrase[7:]}")      # Slicing
+print(f"从开头到索引 6 (不包含 6): {phrase[:6]}")      # Python
+print(f"复制整个字符串: {phrase[:]}")       # Python Slicing
+print(f"从索引 0 到末尾，步长为 2: {phrase[::2]}")     # Pto lc n
+print(f"反转字符串: {phrase[::-1]}")      # gnicilS nohtyP
+print(f"从索引 7 到 12 (不包含 12): {phrase[7:12]}")    # Slici
+```
+
+### 6\. 字符串长度
+
+使用内置函数 `len()` 可以获取字符串中字符的数量。
+
+```python
+string_length = "Hello"
+print(f"\n字符串 '{string_length}' 的长度是: {len(string_length)}")
+print(f"空字符串的长度是: {len('')}")
+```
+
+### 7\. 字符串拼接和重复
+
+  * **拼接 (`+`)**: 使用 `+` 运算符可以将两个或多个字符串连接起来。
+    ```python
+    greeting = "Hello"
+    name = "Alice"
+    message = greeting + ", " + name + "!"
+    print(f"\n拼接字符串: {message}")
+    ```
+  * **重复 (`*`)**: 使用 `*` 运算符和一个整数可以重复字符串多次。
+    ```python
+    repeat_string = "abc" * 3
+    print(f"重复字符串: {repeat_string}")
+    ```
+
+### 8\. 字符串方法
+
+字符串对象有很多内置的方法（函数），可以用来执行各种操作，如查找、替换、分割、改变大小写等。调用方法使用点号 (`.`)。记住，大多数字符串方法都会返回一个**新的**字符串，而不会修改原字符串。
+
+```python
+sample_string = "  Hello Python World  "
+
+print(f"\n常用字符串方法:")
+print(f"转为大写: {sample_string.upper()}")
+print(f"转为小写: {sample_string.lower()}")
+print(f"首字母大写: {sample_string.capitalize()}")
+print(f"每个单词首字母大写: {sample_string.title()}")
+
+print(f"查找 'Python' 的起始索引: {sample_string.find('Python')}") # 如果找不到返回 -1
+print(f"替换 'World' 为 'Universe': {sample_string.replace('World', 'Universe')}")
+
+# 分割字符串，返回一个列表
+words_list = sample_string.split() # 默认按空格分割
+print(f"按空格分割: {words_list}")
+words_list2 = "apple,banana,cherry".split(',')
+print(f"按逗号分割: {words_list2}")
+
+# 连接列表中的字符串，返回一个新字符串
+joined_string = "-".join(["a", "b", "c"])
+print(f"用 '-' 连接列表: {joined_string}")
+
+print(f"是否以 '  Hello' 开头: {sample_string.startswith('  Hello')}")
+print(f"是否以 'World  ' 结尾: {sample_string.endswith('World  ')}")
+
+print(f"移除开头和结尾的空白符: '{sample_string.strip()}'")
+print(f"移除开头的空白符: '{sample_string.lstrip()}'")
+print(f"移除结尾的空白符: '{sample_string.rstrip()}'")
+
+numeric_string = "12345"
+alphabetic_string = "abcdef"
+alphanumeric_string = "abc123"
+whitespace_string = "   "
+
+print(f"' {numeric_string} ' 是数字组成吗: {numeric_string.isdigit()}")
+print(f"' {alphabetic_string} ' 是字母组成吗: {alphabetic_string.isalpha()}")
+print(f"' {alphanumeric_string} ' 是字母或数字组成吗: {alphanumeric_string.isalnum()}")
+print(f"' {whitespace_string} ' 是空白符组成吗: {whitespace_string.isspace()}")
+```
+
+还有很多其他字符串方法，你可以查阅 Python 官方文档来了解更多。
+
+### 9\. 转义序列 (Escape Sequences)
+
+转义序列以反斜杠 (`\`) 开头，用于在字符串中表示特殊字符，这些字符直接输入可能导致问题或有特殊含义。
+
+| 转义序列 | 表示字符     |
+| :------- | :----------- |
+| `\'`     | 单引号       |
+| `\"`     | 双引号       |
+| `\\`     | 反斜杠       |
+| `\n`     | 换行符       |
+| `\t`     | 制表符 (Tab) |
+| `\r`     | 回车符       |
+| `\b`     | 退格符       |
+
+```python
+print(f"\n转义序列:")
+print("This is a line.\nThis is another line.")
+print("Item 1:\tValue 1")
+print("Item 2:\tValue 2")
+print("This contains a backslash: \\")
+print("She said, \"Hello!\"")
+```
+
+### 10\. 原始字符串 (Raw Strings)
+
+在某些情况下，你可能不想让反斜杠作为转义符，而是希望它被当作普通字符处理，特别是在处理文件路径或正则表达式时。这时可以在字符串前加上 `r` 或 `R`，创建原始字符串。
+
+```python
+print(f"\n原始字符串:")
+# 普通字符串，\n 会被解释为换行
+print("C:\\Users\\name\\documents\\newfolder")
+
+# 原始字符串，\n 不会被解释
+print(r"C:\Users\name\documents\newfolder")
+
+# 正则表达式中常用
+import re
+pattern = r"\d+\.\d+" # 匹配一个或多个数字，后跟一个点，后跟一个或多个数字
+text = "The value is 3.14"
+match = re.search(pattern, text)
+print(f"使用原始字符串的正则表达式匹配: {match.group() if match else 'No match'}")
+```
+
+**注意**: 原始字符串不能以单个反斜杠结束。`r"abc\"` 是非法的，但 `r"abc\\"` 或 `r"abc"` 是合法的。
+
+### 11\. 字符串格式化
+
+将变量或其他值插入到字符串中有多种方法。
+
+  * **F-strings (Formatted String Literals) - 推荐**: 在字符串前加上 `f` 或 `F`，然后在字符串中使用大括号 `{}` 包围变量名或表达式。这是 Python 3.6+ 中最简洁和推荐的方式。
+
+    ```python
+    name = "Alice"
+    age = 30
+    print(f"\nF-strings 格式化:")
+    print(f"My name is {name} and I am {age} years old.")
+    print(f"The result of 2 * 3 is {2 * 3}.")
+    ```
+
+  * **`.format()` 方法**: 这是在 f-strings 之前常用的方法。使用 `{}` 作为占位符，然后调用字符串的 `.format()` 方法，传入要填充的值。
+
+    ```python
+    print(f"\n.format() 方法格式化:")
+    print("My name is {} and I am {} years old.".format(name, age))
+    print("My name is {0} and I am {1} years old.".format(name, age)) # 可以通过索引指定位置
+    print("My name is {n} and I am {a} years old.".format(n=name, a=age)) # 可以通过关键字指定
+    ```
+
+  * **百分号 (%) 格式化 (旧式)**: 类似于 C 语言的 printf 风格，使用 `%` 作为占位符。在现代 Python 中较少使用，但在维护旧代码时可能会看到。
+
+    ```python
+    # print(f"\n百分号 (%) 格式化 (旧式):")
+    # print("My name is %s and I am %d years old." % (name, age)) # %s for string, %d for integer
+    ```
+
+-----
+
 
 
 ### 数据结构
