@@ -1,9 +1,6 @@
 # Elasticsearch
 
-
-Elasticsearch 提供了丰富的字段数据类型，以支持各种类型的数据存储、索引和搜索需求。选择合适的字段类型对于优化搜索性能、存储效率以及实现特定的搜索功能至关重要。以下是 Elasticsearch 中常见的字段类型分类及其描述：
-
-**核心数据类型 (Core Datatypes)**
+## 核心数据类型 (Core Datatypes)
 
 * **字符串类型 (String Datatypes)**
     * `text`: 用于索引全文内容的字段，例如文章内容、产品描述等。这类字段会经过分词器处理，支持全文搜索。
@@ -101,9 +98,8 @@ Elasticsearch 提供了丰富的字段数据类型，以支持各种类型的数
 在创建索引映射 (Mapping) 时，需要为每个字段指定合适的数据类型。这将决定 Elasticsearch 如何存储和索引数据，以及如何对其进行搜索和分析。
 
 
-创建API key
 
-
+使用Dev Tools 快速创建API key
 
 ```
 # 创建拥有所有权限的 api key
@@ -123,13 +119,48 @@ PUT /_security/api_key
   }
 }
 
-Output :
 {
-  "id" : "ZNh33JYBU6KMV9hcBczH",
-  "name" : "all_access",
-  "api_key" : "8DEAzxPhTsiyucxN2i5-uA",
-  "encoded" : "Wk5oMzNKWUJVNktNVjloY0Jjekg6OERFQXp4UGhUc2l5dWN4TjJpNS11QQ=="
+  "id": "df9rNJcB8Su0B327IzF1",
+  "name": "all_access",
+  "api_key": "-8S3TTCXRgmSR5Tlc1eytw",
+  "encoded": "ZGY5ck5KY0I4U3UwQjMyN0l6RjE6LThTM1RUQ1hSZ21TUjVUbGMxZXl0dw=="
 }
 
+```
+
+
+
+## Elasticsearch DSL(Python Library)
+
+### 搜索
+
+```python
+from elasticsearch import Elasticsearch
+from elasticsearch_dsl import Q, Search
+
+
+# 创建客户端
+client = Elasticsearch(
+    hosts="http://localhost:9200",
+    api_key="TU43Tk9KY0JPbWZac2FmQ0xRRW06VEZpbkJRTlF5d2lvQXRUcEJyWlZmdw==",
+)
+
+# 构造搜索条件
+s = (
+    Search(using=client, index="xxx")
+    .filter(Q("term", knowledge_base_id=1))
+    .query(
+        Q(
+            "bool",
+            should=[
+                Q("match", title={"query", "xxx"}),
+                Q("match", content={"query", "xxx"}),
+            ],
+        )
+    )
+)
+
+# 执行查询
+response = s.execute()
 ```
 
