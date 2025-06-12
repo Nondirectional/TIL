@@ -8,14 +8,14 @@
 * [x] 学习并掌握数字类型：整数 (`int`) 和浮点数 (`float`)
 * [x] 学习并掌握字符串类型 (`str`)
 * [x] 学习并掌握布尔类型 (`bool`)
-* [ ] 掌握不同数据类型之间的转换方法
-* [ ] 学习算术运算符：`+`, `-`, `*`, `/`, `//`, `%`, `**`
-* [ ] 学习比较运算符：`==`, `!=`, `>`, `<`, `>=`, `<=`
-* [ ] 学习逻辑运算符：`and`, `or`, `not`
-* [ ] 学习赋值运算符：`=`, `+=`, `-=`, `*=`, `/=` 等
-* [ ] 学习成员运算符：`in`, `not in`
-* [ ] 学习身份运算符：`is`, `is not`
-* [ ] 学习使用 `input()` 函数获取用户输入
+* [x] 掌握不同数据类型之间的转换方法
+* [x] 学习算术运算符：`+`, `-`, `*`, `/`, `//`, `%`, `**`
+* [x] 学习比较运算符：`==`, `!=`, `>`, `<`, `>=`, `<=`
+* [x] 学习逻辑运算符：`and`, `or`, `not`
+* [x] 学习赋值运算符：`=`, `+=`, `-=`, `*=`, `/=` 等
+* [x] 学习成员运算符：`in`, `not in`
+* [x] 学习身份运算符：`is`, `is not`
+* [x] 学习使用 `input()` 函数获取用户输入
 * [ ] 学习使用 `print()` 函数输出结果
 * [ ] 掌握 `print()` 函数的格式化输出 (f-strings, `.format()` 方法)
 * [ ] 理解并使用 `if` 语句
@@ -1085,3 +1085,1985 @@ should_retry = False
  if flag == True:  # 或者更好的是 if flag:  
      do_something()
 ```
+
+当然！下面是一份关于如何在 Python 中进行不同数据类型之间转换的教程。
+
+## 数据类型转换
+
+Python 是一种动态类型语言，但理解和掌握不同数据类型之间的转换对于编写健壮和灵活的代码至关重要。
+
+### 1. 为什么需要数据类型转换？
+
+* **数据兼容性：** 不同操作可能需要特定类型的数据。例如，你不能直接将字符串 "10" 和整数 5 相加。
+* **数据清洗：** 从外部源（如文件、网络请求）获取的数据通常是字符串形式，需要转换为其他类型才能进行计算或处理。
+* **用户输入：** `input()` 函数总是返回字符串，如果需要数字或其他类型的数据，则必须进行转换。
+* **格式化输出：** 有时需要将数字转换为字符串以便于打印或与其他字符串拼接。
+
+### 2. 常用数据类型转换函数
+
+Python 内置了许多函数用于数据类型转换。以下是一些最常用的：
+
+#### 2.1 转换为整数 (`int()`)
+
+`int()` 函数可以将其他类型（主要是数字型字符串或浮点数）转换为整数。
+
+**语法:** `int(x, base=10)`
+
+* `x`: 要转换的值。
+* `base`: 可选参数，表示字符串 `x` 的进制（默认为 10 进制）。
+
+**示例:**
+
+```python
+# 浮点数转换为整数（截断小数部分）
+float_num = 3.14
+int_from_float = int(float_num)
+print(f"浮点数 {float_num} 转换为整数: {int_from_float}") # 输出: 3
+
+# 数字字符串转换为整数
+str_num = "123"
+int_from_str = int(str_num)
+print(f"字符串 '{str_num}' 转换为整数: {int_from_str}") # 输出: 123
+
+# 带进制的字符串转换为整数
+binary_str = "1011"
+int_from_binary = int(binary_str, 2)
+print(f"二进制字符串 '{binary_str}' 转换为整数: {int_from_binary}") # 输出: 11
+
+hex_str = "A5"
+int_from_hex = int(hex_str, 16)
+print(f"十六进制字符串 '{hex_str}' 转换为整数: {int_from_hex}") # 输出: 165
+
+# 注意：如果字符串不是有效的数字或包含非数字字符，则会引发 ValueError
+# invalid_str = "hello"
+# int_from_invalid = int(invalid_str) # 这会报错
+```
+
+#### 2.2 转换为浮点数 (`float()`)
+
+`float()` 函数可以将整数或数字型字符串转换为浮点数。
+
+**语法:** `float(x)`
+
+* `x`: 要转换的值。
+
+**示例:**
+
+```python
+# 整数转换为浮点数
+int_num = 10
+float_from_int = float(int_num)
+print(f"整数 {int_num} 转换为浮点数: {float_from_int}") # 输出: 10.0
+
+# 数字字符串转换为浮点数
+str_float = "3.14159"
+float_from_str = float(str_float)
+print(f"字符串 '{str_float}' 转换为浮点数: {float_from_str}") # 输出: 3.14159
+
+# 注意：如果字符串不是有效的浮点数表示，则会引发 ValueError
+# invalid_float_str = "abc"
+# float_from_invalid = float(invalid_float_str) # 这会报错
+```
+
+#### 2.3 转换为字符串 (`str()`)
+
+`str()` 函数可以将几乎所有类型的数据转换为字符串。
+
+**语法:** `str(x)`
+
+* `x`: 要转换的值。
+
+**示例:**
+
+```python
+# 整数转换为字符串
+num = 123
+str_from_int = str(num)
+print(f"整数 {num} 转换为字符串: '{str_from_int}' (类型: {type(str_from_int)})") # 输出: '123' (类型: <class 'str'>)
+
+# 浮点数转换为字符串
+pi = 3.14159
+str_from_float = str(pi)
+print(f"浮点数 {pi} 转换为字符串: '{str_from_float}'") # 输出: '3.14159'
+
+# 列表转换为字符串
+my_list = [1, 2, 3]
+str_from_list = str(my_list)
+print(f"列表 {my_list} 转换为字符串: '{str_from_list}'") # 输出: '[1, 2, 3]'
+
+# 布尔值转换为字符串
+is_true = True
+str_from_bool = str(is_true)
+print(f"布尔值 {is_true} 转换为字符串: '{str_from_bool}'") # 输出: 'True'
+```
+
+#### 2.4 转换为布尔值 (`bool()`)
+
+`bool()` 函数可以将任何类型的数据转换为布尔值。
+
+**语法:** `bool(x)`
+
+* `x`: 要转换的值。
+
+**“假”值规则：**
+在 Python 中，以下值会被认为是 `False`：
+
+* `None`
+* `False`
+* 数字 `0` (整数、浮点数、复数)
+* 空序列 (空字符串 `""`, 空列表 `[]`, 空元组 `()`)
+* 空映射 (空字典 `{}` )
+* 空集合 (`set()`)
+
+所有其他值都被认为是 `True`。
+
+**示例:**
+
+```python
+# 整数转换为布尔值
+print(f"bool(0): {bool(0)}")     # 输出: False
+print(f"bool(1): {bool(1)}")     # 输出: True
+print(f"bool(-5): {bool(-5)}")   # 输出: True
+
+# 浮点数转换为布尔值
+print(f"bool(0.0): {bool(0.0)}") # 输出: False
+print(f"bool(3.14): {bool(3.14)}")# 输出: True
+
+# 字符串转换为布尔值
+print(f"bool(''): {bool('')}")   # 输出: False
+print(f"bool('hello'): {bool('hello')}") # 输出: True
+print(f"bool('False'): {bool('False')}") # 注意：非空字符串 'False' 也是 True
+
+# 列表、元组、字典、集合转换为布尔值
+print(f"bool([]): {bool([])}")   # 输出: False
+print(f"bool([1, 2]): {bool([1, 2])}") # 输出: True
+print(f"bool(()): {bool(())}")   # 输出: False
+print(f"bool({{}}): {bool({{}})}") # 输出: False
+print(f"bool(set()): {bool(set())}") # 输出: False
+
+# None 转换为布尔值
+print(f"bool(None): {bool(None)}") # 输出: False
+```
+
+#### 2.5 转换为列表 (`list()`)
+
+`list()` 函数可以将可迭代对象（如字符串、元组、集合、字典的键）转换为列表。
+
+**语法:** `list(iterable)`
+
+* `iterable`: 任何可迭代对象。
+
+**示例:**
+
+```python
+# 字符串转换为列表
+my_string = "Python"
+list_from_str = list(my_string)
+print(f"字符串 '{my_string}' 转换为列表: {list_from_str}") # 输出: ['P', 'y', 't', 'h', 'o', 'n']
+
+# 元组转换为列表
+my_tuple = (1, 2, 3)
+list_from_tuple = list(my_tuple)
+print(f"元组 {my_tuple} 转换为列表: {list_from_tuple}") # 输出: [1, 2, 3]
+
+# 集合转换为列表（顺序不保证）
+my_set = {1, 2, 3, 1}
+list_from_set = list(my_set)
+print(f"集合 {my_set} 转换为列表: {list_from_set}") # 输出: [1, 2, 3] (顺序可能不同)
+
+# 字典的键转换为列表
+my_dict = {'a': 1, 'b': 2}
+list_from_dict_keys = list(my_dict)
+print(f"字典 {my_dict} 的键转换为列表: {list_from_dict_keys}") # 输出: ['a', 'b']
+```
+
+#### 2.6 转换为元组 (`tuple()`)
+
+`tuple()` 函数与 `list()` 类似，可以将可迭代对象转换为元组。
+
+**语法:** `tuple(iterable)`
+
+* `iterable`: 任何可迭代对象。
+
+**示例:**
+
+```python
+# 字符串转换为元组
+my_string = "Hello"
+tuple_from_str = tuple(my_string)
+print(f"字符串 '{my_string}' 转换为元组: {tuple_from_str}") # 输出: ('H', 'e', 'l', 'l', 'o')
+
+# 列表转换为元组
+my_list = [4, 5, 6]
+tuple_from_list = tuple(my_list)
+print(f"列表 {my_list} 转换为元组: {tuple_from_list}") # 输出: (4, 5, 6)
+
+# 集合转换为元组
+my_set = {4, 5, 6}
+tuple_from_set = tuple(my_set)
+print(f"集合 {my_set} 转换为元组: {tuple_from_set}") # 输出: (4, 5, 6) (顺序可能不同)
+```
+
+#### 2.7 转换为集合 (`set()`)
+
+`set()` 函数可以将可迭代对象转换为集合。集合的一个主要特性是存储唯一的元素，重复的元素会被自动移除。
+
+**语法:** `set(iterable)`
+
+* `iterable`: 任何可迭代对象。
+
+**示例:**
+
+```python
+# 列表转换为集合（去除重复项）
+my_list = [1, 2, 2, 3, 4, 4, 5]
+set_from_list = set(my_list)
+print(f"列表 {my_list} 转换为集合: {set_from_list}") # 输出: {1, 2, 3, 4, 5}
+
+# 字符串转换为集合（每个字符都是一个元素，去除重复字符）
+my_string = "banana"
+set_from_str = set(my_string)
+print(f"字符串 '{my_string}' 转换为集合: {set_from_str}") # 输出: {'b', 'a', 'n'} (顺序不保证)
+```
+
+#### 2.8 转换为字典 (`dict()`)
+
+`dict()` 函数可以将一系列键值对转换为字典。它接受以下形式的参数：
+
+* **1. 键值对元组的列表/元组:** `[('key1', value1), ('key2', value2)]`
+* **2. 关键字参数:** `dict(key1=value1, key2=value2)`
+
+**示例:**
+
+```python
+# 从键值对元组的列表创建字典
+list_of_tuples = [('name', 'Alice'), ('age', 30)]
+dict_from_list = dict(list_of_tuples)
+print(f"从列表创建字典: {dict_from_list}") # 输出: {'name': 'Alice', 'age': 30}
+
+# 从关键字参数创建字典
+dict_from_keywords = dict(city='New York', population=8000000)
+print(f"从关键字参数创建字典: {dict_from_keywords}") # 输出: {'city': 'New York', 'population': 8000000}
+
+# 注意：如果输入格式不正确，会引发 TypeError 或 ValueError
+# invalid_input = [1, 2, 3]
+# dict_from_invalid = dict(invalid_input) # 这会报错
+```
+
+### 3. 类型转换的注意事项
+
+* **数据丢失：**
+    * `int(float_num)` 会截断小数部分，而不是四舍五入。
+    * 将数字转换为字符串时，精度不会丢失，但再转换回数字时可能会因为浮点数精度问题略有差异。
+* **`ValueError`：**
+    * 当你尝试将一个不能转换为目标类型的字符串（例如，将 "hello" 转换为 `int`）时，会引发 `ValueError`。
+    * 在进行字符串到数字的转换时，最好使用 `try-except` 块来处理潜在的 `ValueError`。
+* **`TypeError`：**
+    * 当你尝试将一个不支持转换操作的类型作为参数传递给转换函数时，会引发 `TypeError`。例如，`int([1,2])` 会报错。
+* **集合和字典的无序性：** 转换为 `set` 或 `dict` 后，元素的顺序可能不会保留。
+
+### 4. 实践案例
+
+假设我们从用户那里获取输入，并需要进行一些数学计算。
+
+```python
+# 获取用户输入
+user_input_str_1 = input("请输入第一个数字: ")
+user_input_str_2 = input("请输入第二个数字: ")
+
+try:
+    # 尝试将字符串转换为浮点数
+    num1 = float(user_input_str_1)
+    num2 = float(user_input_str_2)
+
+    # 进行计算
+    sum_nums = num1 + num2
+    product_nums = num1 * num2
+
+    # 将结果转换为字符串进行输出
+    print(f"这两个数字的和是: {str(sum_nums)}")
+    print(f"这两个数字的积是: {str(product_nums)}")
+
+except ValueError:
+    print("错误：请输入有效的数字。")
+except Exception as e:
+    print(f"发生未知错误: {e}")
+
+# 示例：将列表中的数字转换为字符串
+numbers = [10, 20, 30]
+str_numbers = [str(num) for num in numbers] # 使用列表推导式
+print(f"数字列表转换为字符串列表: {str_numbers}") # 输出: ['10', '20', '30']
+
+# 示例：将字符串中的数字提取并求和
+data_str = "items: 10, cost: 25.5, quantity: 3"
+import re # 导入正则表达式模块
+
+# 使用正则表达式找到所有数字
+nums_in_str = re.findall(r'\d+\.?\d*', data_str)
+print(f"从字符串中找到的数字（字符串形式）: {nums_in_str}")
+
+total_sum = 0
+for s_num in nums_in_str:
+    try:
+        total_sum += float(s_num)
+    except ValueError:
+        # 如果不是有效的数字，则跳过
+        pass
+print(f"提取数字并求和: {total_sum}") # 输出: 38.5
+```
+
+好的，这是一份帮助你掌握 Python 算术运算符的教程。
+
+## 算术运算符
+
+在编程中，算术运算符用于执行数学运算，例如加法、减法、乘法等。Python 提供了一套直观且强大的算术运算符，让我们能够轻松地处理数字。掌握这些运算符是学习任何编程语言的基础。
+
+本教程将详细介绍 Python 中的七个主要算术运算符：`+` (加法), `-` (减法), `*` (乘法), `/` (除法), `//` (整除), `%` (取模/取余), `**` (幂运算)。
+
+### 1. 什么是算术运算符？
+
+算术运算符是用于对数值（数字）进行数学计算的符号。它们接受一个或多个操作数（要进行运算的数字）并返回一个结果。
+
+### 2. Python 中的算术运算符
+
+让我们逐一深入了解这些运算符。
+
+#### 2.1 加法运算符 (`+`)
+
+加法运算符用于计算两个或多个数字的和。
+
+**示例：**
+
+```python
+a = 10
+b = 5
+
+result = a + b
+print(f"{a} + {b} = {result}") # 输出: 10 + 5 = 15
+
+# 也可以用于连接字符串（这是一种特殊的用法，不是严格意义上的算术运算）
+str1 = "Hello"
+str2 = " World"
+combined_str = str1 + str2
+print(f"'{str1}' + '{str2}' = '{combined_str}'") # 输出: 'Hello' + ' World' = 'Hello World'
+```
+
+#### 2.2 减法运算符 (`-`)
+
+减法运算符用于计算两个数字的差。
+
+**示例：**
+
+```python
+a = 15
+b = 7
+
+result = a - b
+print(f"{a} - {b} = {result}") # 输出: 15 - 7 = 8
+
+# 也可以表示负数
+negative_num = -10
+print(f"负数: {negative_num}") # 输出: 负数: -10
+```
+
+#### 2.3 乘法运算符 (`*`)
+
+乘法运算符用于计算两个数字的积。
+
+**示例：**
+
+```python
+a = 6
+b = 4
+
+result = a * b
+print(f"{a} * {b} = {result}") # 输出: 6 * 4 = 24
+
+# 也可以用于字符串的重复
+text = "Python"
+repeated_text = text * 3
+print(f"'{text}' * 3 = '{repeated_text}'") # 输出: 'Python' * 3 = 'PythonPythonPython'
+```
+
+#### 2.4 除法运算符 (`/`)
+
+除法运算符用于计算两个数字的商。**需要注意的是，Python 3 中的 `/` 运算符执行的是浮点除法，即使操作数是整数，结果也会是浮点数。**
+
+**示例：**
+
+```python
+a = 10
+b = 3
+
+result = a / b
+print(f"{a} / {b} = {result}") # 输出: 10 / 3 = 3.3333333333333335
+print(f"结果的类型: {type(result)}") # 输出: 结果的类型: <class 'float'>
+
+c = 8
+d = 2
+result_exact = c / d
+print(f"{c} / {d} = {result_exact}") # 输出: 8 / 2 = 4.0
+print(f"结果的类型: {type(result_exact)}") # 输出: 结果的类型: <class 'float'>
+```
+
+#### 2.5 整除运算符 (`//`)
+
+整除运算符（也称为“地板除”）用于计算两个数字的商，并向下取整到最接近的整数。这意味着它会丢弃小数部分，并返回一个整数。
+
+**示例：**
+
+```python
+a = 10
+b = 3
+
+result = a // b
+print(f"{a} // {b} = {result}") # 输出: 10 // 3 = 3
+
+c = 7
+d = 2
+result_exact_int = c // d
+print(f"{c} // {d} = {result_exact_int}") # 输出: 7 // 2 = 3
+
+# 对于负数，结果会向下取整到负无穷大
+e = -10
+f = 3
+result_neg = e // f
+print(f"{e} // {f} = {result_neg}") # 输出: -10 // 3 = -4 (而不是 -3)
+
+g = 10
+h = -3
+result_neg_divisor = g // h
+print(f"{g} // {h} = {result_neg_divisor}") # 输出: 10 // -3 = -4
+```
+**注意：** 当操作数中包含负数时，`//` 运算符的行为是“向下取整到负无穷大”。这意味着结果将是小于或等于精确商的最大整数。例如，-10 / 3 的精确结果约为 -3.33，向下取整后是 -4。
+
+#### 2.6 取模/取余运算符 (`%`)
+
+取模运算符用于计算两个数字相除后的余数。
+
+**示例：**
+
+```python
+a = 10
+b = 3
+
+result = a % b
+print(f"{a} % {b} = {result}") # 输出: 10 % 3 = 1 (10 除以 3 等于 3 余 1)
+
+c = 15
+d = 5
+result_zero_remainder = c % d
+print(f"{c} % {d} = {result_zero_remainder}") # 输出: 15 % 5 = 0
+
+# 对于负数操作数，取模运算的结果符号与除数相同
+e = -10
+f = 3
+result_neg_dividend = e % f
+print(f"{e} % {f} = {result_neg_dividend}") # 输出: -10 % 3 = 2 (因为 -10 = 3 * (-4) + 2)
+
+g = 10
+h = -3
+result_neg_divisor = g % h
+print(f"{g} % {h} = {result_neg_divisor}") # 输出: 10 % -3 = -2 (因为 10 = (-3) * (-4) - 2)
+```
+
+#### 2.7 幂运算符 (`**`)
+
+幂运算符用于计算一个数字的指定次幂（次方）。
+
+**示例：**
+
+```python
+base = 2
+exponent = 3
+
+result = base ** exponent
+print(f"{base} ** {exponent} = {result}") # 输出: 2 ** 3 = 8 (即 2 * 2 * 2)
+
+# 浮点数幂
+float_base = 2.5
+float_exponent = 2
+result_float_power = float_base ** float_exponent
+print(f"{float_base} ** {float_exponent} = {result_float_power}") # 输出: 2.5 ** 2 = 6.25
+
+# 小数幂（开方）
+square_root = 16 ** 0.5
+print(f"16 ** 0.5 = {square_root}") # 输出: 16 ** 0.5 = 4.0
+```
+
+### 3. 运算符优先级
+
+当一个表达式中包含多个算术运算符时，Python 会遵循特定的运算顺序，这被称为“运算符优先级”。这与我们在数学中学到的优先级规则相同：
+
+1.  **括号 `()`**：总是最高优先级，括号内的表达式最先计算。
+2.  **幂运算 `**`**：次高优先级。
+3.  **乘法 `*`，除法 `/`，整除 `//`，取模 `%`**：这些运算符优先级相同，从左到右依次计算。
+4.  **加法 `+`，减法 `-`**：最低优先级，从左到右依次计算。
+
+**助记符：** PEMDAS / BODMAS (括号，指数，乘除，加减)
+
+**示例：**
+
+```python
+result1 = 5 + 3 * 2  # 3 * 2 先计算，然后加 5
+print(f"5 + 3 * 2 = {result1}") # 输出: 11
+
+result2 = (5 + 3) * 2 # 括号内的 5 + 3 先计算，然后乘以 2
+print(f"(5 + 3) * 2 = {result2}") # 输出: 16
+
+result3 = 2 ** 3 + 4 / 2 # 2 ** 3 先计算 (8)，然后 4 / 2 (2.0)，最后 8 + 2.0
+print(f"2 ** 3 + 4 / 2 = {result3}") # 输出: 10.0
+
+result4 = 10 / 3 // 2 # 10 / 3 = 3.33...，然后 3.33... // 2 = 1.0
+print(f"10 / 3 // 2 = {result4}") # 输出: 1.0
+```
+
+好的，这是一份关于 Python 比较运算符的教程。
+
+## 比较运算符
+
+在编程中，除了进行数学运算外，我们经常需要比较两个值的大小、相等性或不相等性。这就需要用到比较运算符。比较运算符在 Python 中用于评估两个值之间的关系，并总是返回一个布尔值（`True` 或 `False`）。它们是控制程序流程（如 `if` 语句和循环）的基础。
+
+### 1. 什么是比较运算符？
+
+比较运算符用于比较两个值。根据比较的结果，它们会返回 `True`（如果条件为真）或 `False`（如果条件为假）。
+
+### 2. Python 中的比较运算符
+
+让我们逐一深入了解这些运算符。
+
+#### 2.1 等于运算符 (`==`)
+
+等于运算符用于检查两个值是否相等。
+
+**示例：**
+
+```python
+a = 10
+b = 10
+c = 5
+
+print(f"{a} == {b} 结果: {a == b}") # 输出: 10 == 10 结果: True
+print(f"{a} == {c} 结果: {a == c}") # 输出: 10 == 5 结果: False
+
+# 比较字符串
+str1 = "Hello"
+str2 = "Hello"
+str3 = "hello"
+
+print(f"'{str1}' == '{str2}' 结果: {str1 == str2}") # 输出: 'Hello' == 'Hello' 结果: True
+print(f"'{str1}' == '{str3}' 结果: {str1 == str3}") # 输出: 'Hello' == 'hello' 结果: False (大小写敏感)
+
+# 比较不同类型（通常返回 False，除非有明确的转换规则）
+print(f"10 == 10.0 结果: {10 == 10.0}") # 输出: 10 == 10.0 结果: True (Python 会进行隐式类型转换来比较数值)
+print(f"10 == '10' 结果: {10 == '10'}") # 输出: 10 == '10' 结果: False (不同类型通常不相等)
+```
+
+#### 2.2 不等于运算符 (`!=`)
+
+不等于运算符用于检查两个值是否不相等。
+
+**示例：**
+
+```python
+a = 10
+b = 10
+c = 5
+
+print(f"{a} != {b} 结果: {a != b}") # 输出: 10 != 10 结果: False
+print(f"{a} != {c} 结果: {a != c}") # 输出: 10 != 5 结果: True
+
+# 比较字符串
+str1 = "Apple"
+str2 = "Orange"
+
+print(f"'{str1}' != '{str2}' 结果: {str1 != str2}") # 输出: 'Apple' != 'Orange' 结果: True
+```
+
+#### 2.3 大于运算符 (`>`)
+
+大于运算符用于检查左侧的值是否大于右侧的值。
+
+**示例：**
+
+```python
+a = 20
+b = 15
+c = 20
+
+print(f"{a} > {b} 结果: {a > b}") # 输出: 20 > 15 结果: True
+print(f"{a} > {c} 结果: {a > c}") # 输出: 20 > 20 结果: False
+print(f"{b} > {a} 结果: {b > a}") # 输出: 15 > 20 结果: False
+```
+
+#### 2.4 小于运算符 (`<`)
+
+小于运算符用于检查左侧的值是否小于右侧的值。
+
+**示例：**
+
+```python
+a = 10
+b = 15
+c = 10
+
+print(f"{a} < {b} 结果: {a < b}") # 输出: 10 < 15 结果: True
+print(f"{a} < {c} 结果: {a < c}") # 输出: 10 < 10 结果: False
+print(f"{b} < {a} 结果: {b < a}") # 输出: 15 < 10 结果: False
+```
+
+#### 2.5 大于等于运算符 (`>=`)
+
+大于等于运算符用于检查左侧的值是否大于或等于右侧的值。
+
+**示例：**
+
+```python
+a = 20
+b = 15
+c = 20
+
+print(f"{a} >= {b} 结果: {a >= b}") # 输出: 20 >= 15 结果: True
+print(f"{a} >= {c} 结果: {a >= c}") # 输出: 20 >= 20 结果: True
+print(f"{b} >= {a} 结果: {b >= a}") # 输出: 15 >= 20 结果: False
+```
+
+#### 2.6 小于等于运算符 (`<=`)
+
+小于等于运算符用于检查左侧的值是否小于或等于右侧的值。
+
+**示例：**
+
+```python
+a = 10
+b = 15
+c = 10
+
+print(f"{a} <= {b} 结果: {a <= b}") # 输出: 10 <= 15 结果: True
+print(f"{a} <= {c} 结果: {a <= c}") # 输出: 10 <= 10 结果: True
+print(f"{b} <= {a} 结果: {b <= a}") # 输出: 15 <= 10 结果: False
+```
+
+### 3. 比较字符串和序列
+
+比较运算符不仅适用于数字，也适用于字符串和其他序列类型（如列表、元组）。
+
+* **字符串比较：** 字符串是根据它们的字典顺序（字母顺序）进行比较的，比较是逐个字符进行的，基于每个字符的 Unicode 值。大小写敏感。
+* **序列比较：** 列表、元组等序列也是按元素从左到右依次比较。如果第一个不相等的元素决定了大小关系，则比较停止。如果所有元素都相等且长度相同，则序列相等。如果一个序列是另一个序列的初始子序列，则较短的序列被认为是“小于”较长的序列。
+
+**示例：**
+
+```python
+# 字符串比较
+print(f"'apple' < 'banana' 结果: {'apple' < 'banana'}") # 输出: True (a 在 b 之前)
+print(f"'Apple' < 'apple' 结果: {'Apple' < 'apple'}") # 输出: True (A 的 Unicode 值小于 a)
+print(f"'cat' == 'Cat' 结果: {'cat' == 'Cat'}") # 输出: False
+
+# 列表比较
+list1 = [1, 2, 3]
+list2 = [1, 2, 4]
+list3 = [1, 2, 3]
+list4 = [1, 2]
+
+print(f"{list1} < {list2} 结果: {list1 < list2}")   # 输出: True (3 < 4)
+print(f"{list1} == {list3} 结果: {list1 == list3}") # 输出: True
+print(f"{list1} > {list4} 结果: {list1 > list4}")   # 输出: True (list1 较长，且是 list4 的超序列)
+```
+
+### 4. 链式比较
+
+Python 支持链式比较，这使得编写复合条件变得非常简洁和易读。
+
+**语法:** `a < b < c` 等同于 `a < b and b < c`
+
+**示例：**
+
+```python
+age = 25
+
+# 检查 age 是否在 18 到 30 之间（包含 18 和 30）
+is_adult = 18 <= age <= 30
+print(f"age {age} 是否在 18 到 30 之间: {is_adult}") # 输出: True
+
+grade = 85
+# 检查 grade 是否在 60 到 90 之间（不包含 90）
+is_passing_grade = 60 <= grade < 90
+print(f"grade {grade} 是否是及格分数: {is_passing_grade}") # 输出: True
+```
+
+### 5. 比较运算符在条件语句中的应用
+
+比较运算符最常见的用途是在条件语句（如 `if`, `elif`, `else`）和循环 (`while`) 中，它们决定了程序执行的路径。
+
+**示例：**
+
+```python
+score = 75
+
+if score >= 90:
+    print("优秀！")
+elif score >= 60:
+    print("及格。")
+else:
+    print("不及格。")
+
+# 输出: 及格。
+
+temperature = 28
+
+if temperature > 30:
+    print("天气很热！")
+elif temperature < 10:
+    print("天气很冷！")
+else:
+    print("天气宜人。")
+
+# 输出: 天气宜人。
+```
+好的，这是一份帮助你掌握 Python 逻辑运算符的教程。
+
+## 逻辑运算符
+
+在编程中，我们经常需要组合多个条件来做出更复杂的决策。这时，逻辑运算符就派上用场了。逻辑运算符用于连接和评估布尔表达式（即返回 `True` 或 `False` 的表达式），并返回一个最终的布尔结果。它们是控制程序流程，尤其是在 `if` 语句和循环中不可或缺的工具。
+
+### 1. 什么是逻辑运算符？
+
+逻辑运算符是用于结合或修改布尔表达式的特殊关键字。它们通过判断操作数的真假来决定整个表达式的真假。在 Python 中，任何非零数字、非空序列或对象都被视为 `True`，而零、空序列（如空字符串、空列表）和 `None` 被视为 `False`（这被称为“真值判断”）。
+
+### 2. Python 中的逻辑运算符
+
+让我们逐一深入了解这些运算符。
+
+#### 2.1 逻辑与运算符 (`and`)
+
+`and` 运算符用于连接两个或多个布尔表达式。只有当所有连接的表达式都为 `True` 时，整个表达式的结果才为 `True`；否则，结果为 `False`。
+
+**真值表：**
+
+| 表达式 1 | 表达式 2 | 结果 (表达式 1 `and` 表达式 2) |
+| -------- | -------- | ------------------------------ |
+| `True`   | `True`   | `True`                         |
+| `True`   | `False`  | `False`                        |
+| `False`  | `True`   | `False`                        |
+| `False`  | `False`  | `False`                        |
+
+**示例：**
+
+```python
+age = 25
+has_license = True
+
+# 条件：年龄大于 18 岁 且 有驾照
+can_drive = (age > 18) and has_license
+print(f"({age} > 18) and {has_license} = {can_drive}") # 输出: (25 > 18) and True = True
+
+age = 16
+can_drive_again = (age > 18) and has_license
+print(f"({age} > 18) and {has_license} = {can_drive_again}") # 输出: (16 > 18) and True = False
+
+temperature = 28
+is_sunny = True
+
+# 条件：温度在 25 到 30 之间 且 天气晴朗
+is_perfect_day = (temperature >= 25 and temperature <= 30) and is_sunny
+print(f"((25 <= {temperature} <= 30) and {is_sunny}) = {is_perfect_day}") # 输出: ((25 <= 28 <= 30) and True) = True
+```
+
+**短路评估 (Short-circuiting) for `and`:**
+如果 `and` 运算符的左侧表达式为 `False`，那么 Python 会立即判断整个 `and` 表达式的结果为 `False`，而不会去评估右侧的表达式。这被称为短路评估。
+
+**示例：**
+
+```python
+x = 0
+y = 10
+
+# print(y / x) # 这会引起 ZeroDivisionError
+
+# 使用 and 进行短路评估
+if x != 0 and (y / x > 5): # 如果 x 是 0，则 y / x 不会被执行
+    print("条件为真")
+else:
+    print("条件为假或 x 为 0") # 输出: 条件为假或 x 为 0
+```
+
+#### 2.2 逻辑或运算符 (`or`)
+
+`or` 运算符也用于连接两个或多个布尔表达式。只要有一个连接的表达式为 `True`，整个表达式的结果就为 `True`；只有当所有连接的表达式都为 `False` 时，结果才为 `False`。
+
+**真值表：**
+
+| 表达式 1 | 表达式 2 | 结果 (表达式 1 `or` 表达式 2) |
+| -------- | -------- | ----------------------------- |
+| `True`   | `True`   | `True`                        |
+| `True`   | `False`  | `True`                        |
+| `False`  | `True`   | `True`                        |
+| `False`  | `False`  | `False`                       |
+
+**示例：**
+
+```python
+is_weekend = False
+has_day_off = True
+
+# 条件：是周末 或 有休假
+can_relax = is_weekend or has_day_off
+print(f"{is_weekend} or {has_day_off} = {can_relax}") # 输出: False or True = True
+
+is_weekend = False
+has_day_off = False
+can_relax_again = is_weekend or has_day_off
+print(f"{is_weekend} or {has_day_off} = {can_relax_again}") # 输出: False or False = False
+
+score = 55
+attended_class = True
+
+# 条件：分数及格 (>= 60) 或 出勤良好
+can_pass = (score >= 60) or attended_class
+print(f"({score} >= 60) or {attended_class} = {can_pass}") # 输出: (55 >= 60) or True = True
+```
+
+**短路评估 (Short-circuiting) for `or`:**
+如果 `or` 运算符的左侧表达式为 `True`，那么 Python 会立即判断整个 `or` 表达式的结果为 `True`，而不会去评估右侧的表达式。
+
+**示例：**
+
+```python
+default_value = ""
+user_input = "Hello"
+
+# 如果 user_input 为空，则使用 default_value
+final_value = user_input or default_value
+print(f"final_value: '{final_value}'") # 输出: final_value: 'Hello'
+
+user_input_empty = ""
+final_value_empty = user_input_empty or default_value
+print(f"final_value_empty: '{final_value_empty}'") # 输出: final_value_empty: ''
+```
+
+#### 2.3 逻辑非运算符 (`not`)
+
+`not` 运算符是一个一元运算符（只作用于一个操作数），它会反转布尔表达式的真假值。如果表达式为 `True`，`not` 会使其变为 `False`；如果表达式为 `False`，`not` 会使其变为 `True`。
+
+**真值表：**
+
+| 表达式 | 结果 (`not` 表达式) |
+| ------ | ------------------- |
+| `True` | `False`             |
+| `False`| `True`              |
+
+**示例：**
+
+```python
+is_raining = True
+print(f"not {is_raining} = {not is_raining}") # 输出: not True = False
+
+is_hungry = False
+print(f"not {is_hungry} = {not is_hungry}") # 输出: not False = True
+
+# 应用于表达式
+age = 17
+is_adult = age >= 18
+print(f"age {age} is_adult: {is_adult}") # 输出: age 17 is_adult: False
+print(f"not (age >= 18) = {not (age >= 18)}") # 输出: not (age >= 18) = True (即 not False = True)
+```
+
+### 3. 运算符优先级
+
+当一个表达式中包含多个逻辑运算符以及其他运算符时，Python 会遵循特定的运算顺序。优先级从高到低如下：
+
+1.  **算术运算符** (如 `+`, `-`, `*`, `/`, `**` 等)
+2.  **比较运算符** (如 `==`, `!=`, `>`, `<`, `>=`, `<=` 等)
+3.  **`not`** 运算符
+4.  **`and`** 运算符
+5.  **`or`** 运算符
+
+**括号 `()`** 总是具有最高优先级，可以用来强制改变运算顺序。
+
+**示例：**
+
+```python
+# 示例 1: 比较运算符优先于逻辑运算符
+x = 10
+y = 5
+z = 12
+
+result1 = x > y and y < z # (x > y) (True) and (y < z) (True) -> True and True -> True
+print(f"{x} > {y} and {y} < {z} = {result1}") # 输出: 10 > 5 and 5 < 12 = True
+
+# 示例 2: not 优先于 and 和 or
+is_active = True
+is_admin = False
+
+result2 = not is_active and is_admin # (not is_active) (False) and is_admin (False) -> False and False -> False
+print(f"not {is_active} and {is_admin} = {result2}") # 输出: not True and False = False
+
+# 示例 3: 使用括号改变优先级
+result3 = not (is_active and is_admin) # (is_active and is_admin) (False)，然后 not False -> True
+print(f"not ({is_active} and {is_admin}) = {result3}") # 输出: not (True and False) = True
+```
+
+### 4. 逻辑运算符在条件语句中的应用
+
+逻辑运算符最常用于 `if`, `elif`, `else` 语句中，以创建复杂的条件逻辑。
+
+**示例：**
+
+```python
+# 模拟用户登录
+username = "admin"
+password = "password123"
+is_logged_in = False
+
+input_username = input("请输入用户名: ")
+input_password = input("请输入密码: ")
+
+if input_username == username and input_password == password and not is_logged_in:
+    print("登录成功！")
+    is_logged_in = True
+elif is_logged_in:
+    print("您已登录。")
+else:
+    print("用户名或密码错误。")
+
+# 模拟电影票购买条件
+age = int(input("请输入您的年龄: "))
+is_student = input("您是学生吗？(y/n): ").lower() == 'y'
+
+if age >= 18 and not is_student:
+    print("您需要购买成人票。")
+elif age < 18 or is_student: # 小于 18 岁或者学生可以买优惠票
+    print("您可以购买优惠票。")
+else:
+    print("输入无效。")
+```
+
+好的，这是一份关于 Python 赋值运算符的教程，不包含总结和练习部分。
+
+## 赋值运算符
+
+在 Python 中，赋值运算符用于将值存储到变量中。除了最基本的 `=` 运算符，Python 还提供了一系列复合赋值运算符，它们结合了算术（或其他）运算和赋值操作，使得代码更加简洁高效。
+
+### 1. 什么是赋值运算符？
+
+赋值运算符用于将右侧表达式的值赋给左侧的变量。
+
+### 2. 基本赋值运算符 (`=`)
+
+`=` 是最常用的赋值运算符。它将右侧的值或表达式的结果赋给左侧的变量。
+
+**语法：** `variable = value`
+
+**示例：**
+
+```python
+# 将整数值 10 赋给变量 x
+x = 10
+print(f"x 的值: {x}") # 输出: x 的值: 10
+
+# 将字符串 "Hello" 赋给变量 greeting
+greeting = "Hello"
+print(f"greeting 的值: {greeting}") # 输出: greeting 的值: Hello
+
+# 将一个表达式的结果赋给变量
+y = 5
+z = x + y # x + y 的结果 (15) 赋给 z
+print(f"z 的值: {z}") # 输出: z 的值: 15
+
+# 可以同时为多个变量赋值（链式赋值）
+a = b = c = 100
+print(f"a: {a}, b: {b}, c: {c}") # 输出: a: 100, b: 100, c: 100
+
+# 也可以进行解包赋值（sequence unpacking）
+data = [10, 20, 30]
+val1, val2, val3 = data
+print(f"val1: {val1}, val2: {val2}, val3: {val3}") # 输出: val1: 10, val2: 20, val3: 30
+```
+
+### 3. 复合赋值运算符
+
+复合赋值运算符结合了算术（或其他）运算和赋值操作。它们是以下形式的简写：`variable = variable operator expression`。
+
+这些运算符使得代码更简洁，并且在某些情况下可能更高效（尽管现代 Python 解释器对性能的优化使得差异不那么明显）。
+
+#### 3.1 加法赋值 (`+=`)
+
+`a += b` 等同于 `a = a + b`。它将变量 `a` 的值与 `b` 相加，然后将结果重新赋给 `a`。
+
+**示例：**
+
+```python
+x = 10
+x += 5 # 等同于 x = x + 5
+print(f"x += 5 后的值: {x}") # 输出: x += 5 后的值: 15
+
+# 也可以用于字符串拼接
+message = "Hello"
+message += " World" # 等同于 message = message + " World"
+print(f"message += ' World' 后的值: {message}") # 输出: message += ' World' 后的值: Hello World
+
+# 也可以用于列表拼接（扩展列表）
+my_list = [1, 2]
+my_list += [3, 4] # 等同于 my_list = my_list + [3, 4]
+print(f"my_list += [3, 4] 后的值: {my_list}") # 输出: my_list += [3, 4] 后的值: [1, 2, 3, 4]
+```
+
+#### 3.2 减法赋值 (`-=`)
+
+`a -= b` 等同于 `a = a - b`。它将变量 `a` 的值减去 `b`，然后将结果重新赋给 `a`。
+
+**示例：**
+
+```python
+y = 20
+y -= 7 # 等同于 y = y - 7
+print(f"y -= 7 后的值: {y}") # 输出: y -= 7 后的值: 13
+```
+
+#### 3.3 乘法赋值 (`*=`)
+
+`a *= b` 等同于 `a = a * b`。它将变量 `a` 的值与 `b` 相乘，然后将结果重新赋给 `a`。
+
+**示例：**
+
+```python
+z = 5
+z *= 4 # 等同于 z = z * 4
+print(f"z *= 4 后的值: {z}") # 输出: z *= 4 后的值: 20
+
+# 也可以用于字符串重复
+text = "ABC"
+text *= 3 # 等同于 text = text * 3
+print(f"text *= 3 后的值: {text}") # 输出: text *= 3 后的值: ABCABCABC
+```
+
+#### 3.4 除法赋值 (`/=`)
+
+`a /= b` 等同于 `a = a / b`。它将变量 `a` 的值除以 `b`，然后将结果重新赋给 `a`。
+**注意：** 结果总是浮点数。
+
+**示例：**
+
+```python
+m = 25
+m /= 5 # 等同于 m = m / 5
+print(f"m /= 5 后的值: {m}") # 输出: m /= 5 后的值: 5.0
+
+n = 10
+n /= 3 # 等同于 n = n / 3
+print(f"n /= 3 后的值: {n}") # 输出: n /= 3 后的值: 3.3333333333333335
+```
+
+#### 3.5 整除赋值 (`//=`)
+
+`a //= b` 等同于 `a = a // b`。它将变量 `a` 的值整除 `b`，然后将结果重新赋给 `a`。
+
+**示例：**
+
+```python
+p = 17
+p //= 3 # 等同于 p = p // 3
+print(f"p //= 3 后的值: {p}") # 输出: p //= 3 后的值: 5
+
+q = -10
+q //= 3 # 等同于 q = q // 3
+print(f"q //= 3 后的值: {q}") # 输出: q //= 3 后的值: -4
+```
+
+#### 3.6 取模赋值 (`%=`)
+
+`a %= b` 等同于 `a = a % b`。它将变量 `a` 的值对 `b` 取模，然后将结果重新赋给 `a`。
+
+**示例：**
+
+```python
+r = 27
+r %= 5 # 等同于 r = r % 5
+print(f"r %= 5 后的值: {r}") # 输出: r %= 5 后的值: 2
+```
+
+#### 3.7 幂赋值 (`**=`)
+
+`a **= b` 等同于 `a = a ** b`。它将变量 `a` 的值进行 `b` 次幂运算，然后将结果重新赋给 `a`。
+
+**示例：**
+
+```python
+s = 2
+s **= 3 # 等同于 s = s ** 3 (2 的 3 次方)
+print(f"s **= 3 后的值: {s}") # 输出: s **= 3 后的值: 8
+```
+
+#### 3.8 位运算符复合赋值 (了解即可)
+
+除了算术复合赋值，Python 还有用于位运算的复合赋值运算符。这些通常在处理二进制数据或进行底层操作时使用。
+
+* `&=` (按位与赋值)
+* `|=` (按位或赋值)
+* `^=` (按位异或赋值)
+* `>>=` (右移赋值)
+* `<<=` (左移赋值)
+
+**示例 (位运算符复合赋值)：**
+
+```python
+# 按位与赋值
+bit_val = 10 # 二进制 1010
+bit_val &= 3 # 二进制 0011 (1010 & 0011 = 0010)
+print(f"bit_val &= 3 后的值: {bit_val}") # 输出: 2
+
+# 左移赋值
+shift_val = 5 # 二进制 0101
+shift_val <<= 1 # 左移一位 (01010) 等于 10
+print(f"shift_val <<= 1 后的值: {shift_val}") # 输出: 10
+```
+
+### 4. 赋值表达式 (Python 3.8+ `:=` 海象运算符)
+
+自 Python 3.8 起，引入了赋值表达式 (`:=`)，也常被称为“海象运算符”（因为它看起来像一只海象）。它允许你在表达式内部进行变量赋值。这与赋值语句 `=` 不同，`=` 是一个语句，不能在表达式中使用。
+
+**语法：** `(variable := expression)`
+
+**示例：**
+
+```python
+# 传统方式
+# data = [1, 2, 3]
+# n = len(data)
+# if n > 0:
+#     print(f "列表长度为: {n}")
+
+# 使用海象运算符
+data = [1, 2, 3]
+if (n := len(data)) > 0: # 在 if 条件中同时赋值和判断
+    print(f"列表长度为: {n}") # 输出: 列表长度为: 3
+
+# 在列表推导式中使用
+# scores = [80, 75, 90, 60]
+# pass_threshold = 70
+# passed_scores = [score for score in scores if score >= pass_threshold]
+# print(f "及格分数: {passed_scores}")
+
+# 使用海象运算符改进
+scores = [80, 75, 90, 60]
+if any((score := s) >= 90 for s in scores): # 赋值 score 为符合条件的 s
+    print(f"有至少一个分数达到 90 或更高，其中一个分数是: {score}") # 这里 score 会是最后一个满足条件的值
+
+# 简化 while 循环
+# while True:
+#     command = input("请输入命令 (输入 'exit' 退出): ")
+#     if command == 'exit':
+#         break
+#     print(f "执行命令: {command}")
+
+# 使用海象运算符
+while (command := input("请输入命令 (输入 'exit' 退出): ")) != 'exit':
+    print(f"执行命令: {command}")
+```
+
+海象运算符在某些场景下可以提高代码的简洁性和可读性，但应谨慎使用，避免过度复杂化表达式。
+
+好的，这是一份关于 Python 成员运算符的教程，不包含总结和练习部分。
+
+## 成员运算符
+
+在 Python 中，成员运算符用于测试序列（如字符串、列表、元组）或集合中是否包含某个特定值。它们在检查元素是否存在于集合或序列中时非常有用。
+
+### 1. 什么是成员运算符？
+
+成员运算符用于检查一个值是否是某个序列（或集合、字典的键）的成员。它们总是返回布尔值 `True` 或 `False`。
+
+### 2. Python 中的成员运算符
+
+Python 提供了两个成员运算符：`in` 和 `not in`。
+
+#### 2.1 成员运算符 (`in`)
+
+`in` 运算符用于检查左侧的操作数（一个值）是否存在于右侧的操作数（一个序列、集合或字典的键）中。如果存在，则返回 `True`；否则，返回 `False`。
+
+**语法：** `value in sequence`
+
+**适用于：**
+* **字符串：** 检查子字符串是否存在于字符串中。
+* **列表：** 检查元素是否存在于列表中。
+* **元组：** 检查元素是否存在于元组中。
+* **集合：** 检查元素是否存在于集合中。
+* **字典：** 检查键是否存在于字典中（不检查值）。
+
+**示例：**
+
+```python
+# 检查字符串中的子字符串
+text = "Hello, Python!"
+print(f"'Python' in '{text}' 结果: {'Python' in text}") # 输出: True
+print(f"'Java' in '{text}' 结果: {'Java' in text}")     # 输出: False
+print(f"'hello' in '{text}' 结果: {'hello' in text}")   # 输出: False (大小写敏感)
+
+# 检查列表中是否存在元素
+my_list = [10, 20, 30, 40]
+print(f"20 in {my_list} 结果: {20 in my_list}")   # 输出: True
+print(f"50 in {my_list} 结果: {50 in my_list}")   # 输出: False
+
+# 检查元组中是否存在元素
+my_tuple = ('apple', 'banana', 'cherry')
+print(f"'banana' in {my_tuple} 结果: {'banana' in my_tuple}") # 输出: True
+print(f"'grape' in {my_tuple} 结果: {'grape' in my_tuple}")   # 输出: False
+
+# 检查集合中是否存在元素
+my_set = {1, 2, 3, 4}
+print(f"3 in {my_set} 结果: {3 in my_set}") # 输出: True
+print(f"5 in {my_set} 结果: {5 in my_set}") # 输出: False
+
+# 检查字典中是否存在键
+my_dict = {'name': 'Alice', 'age': 30, 'city': 'New York'}
+print(f"'age' in {my_dict} 结果: {'age' in my_dict}") # 输出: True (检查键)
+print(f"'country' in {my_dict} 结果: {'country' in my_dict}") # 输出: False (检查键)
+print(f"30 in {my_dict} 结果: {30 in my_dict}") # 输出: False (不直接检查值)
+
+# 如果想检查字典的值，你需要遍历字典的值：
+print(f"30 in {my_dict.values()} 结果: {30 in my_dict.values()}") # 输出: True
+```
+
+#### 2.2 非成员运算符 (`not in`)
+
+`not in` 运算符是 `in` 运算符的反义。它用于检查左侧的操作数（一个值）是否 **不** 存在于右侧的操作数（一个序列、集合或字典的键）中。如果不存在，则返回 `True`；否则，返回 `False`。
+
+**语法：** `value not in sequence`
+
+**示例：**
+
+```python
+# 检查字符串中不存在的子字符串
+text = "Programming is fun!"
+print(f"'Java' not in '{text}' 结果: {'Java' not in text}") # 输出: True
+print(f"'fun' not in '{text}' 结果: {'fun' not in text}")   # 输出: False
+
+# 检查列表中不存在的元素
+numbers = [100, 200, 300]
+print(f"50 not in {numbers} 结果: {50 not in numbers}")     # 输出: True
+print(f"200 not in {numbers} 结果: {200 not in numbers}")   # 输出: False
+
+# 检查字典中不存在的键
+student_info = {'id': 101, 'major': 'CS'}
+print(f"'grade' not in {student_info} 结果: {'grade' not in student_info}") # 输出: True
+print(f"'id' not in {student_info} 结果: {'id' not in student_info}")     # 输出: False
+```
+
+### 3. 应用场景
+
+成员运算符在日常编程中非常常见，尤其是在条件判断、数据验证和过滤时。
+
+* **条件判断：**
+    ```python
+    user_role = "admin"
+    if user_role in ["admin", "moderator"]:
+        print("用户有管理权限。")
+    ```
+
+* **数据验证：**
+    ```python
+    valid_colors = ['red', 'green', 'blue']
+    user_color = input("请输入您喜欢的颜色: ")
+    if user_color.lower() not in valid_colors:
+        print("输入的颜色无效。")
+    else:
+        print(f"您选择了 {user_color}。")
+    ```
+
+* **循环和搜索：**
+    ```python
+    sentence = "The quick brown fox jumps over the lazy dog."
+    if "fox" in sentence:
+        print("句子中包含 'fox'。")
+    
+    # 查找特定字符
+    vowels = "aeiouAEIOU"
+    char_to_check = 'P'
+    if char_to_check in vowels:
+        print(f"'{char_to_check}' 是一个元音字母。")
+    else:
+        print(f"'{char_to_check}' 不是一个元音字母。")
+    ```
+
+成员运算符在处理集合数据时效率很高，因为集合是为快速成员查找而优化的（平均时间复杂度为 O(1)）。对于列表和元组等序列，成员查找的时间复杂度通常是 O(n)，即与序列的长度成正比。
+好的，这是一份关于 Python 身份运算符的教程，不包含总结和练习部分。
+
+## 身份运算符
+
+在 Python 中，除了比较值是否相等之外，有时还需要判断两个变量是否引用了内存中的同一个对象。这时就需要用到身份运算符。身份运算符关注的是对象的内存地址，而不是对象的值。
+
+### 1. 什么是身份运算符？
+
+身份运算符用于检查两个变量是否指向（引用）内存中的同一个对象。它们总是返回布尔值 `True` 或 `False`。
+
+### 2. Python 中的身份运算符
+
+Python 提供了两个身份运算符：`is` 和 `is not`。
+
+#### 2.1 身份运算符 (`is`)
+
+`is` 运算符用于检查左侧的操作数和右侧的操作数是否指向内存中的同一个对象。如果它们是同一个对象，则返回 `True`；否则，返回 `False`。
+
+**语法：** `object1 is object2`
+
+**重要说明：**
+
+* **`is` 与 `==` 的区别：**
+    * `is` 比较的是两个变量的 **身份（identity）**，即它们在内存中的存储地址是否相同。
+    * `==` 比较的是两个变量的 **值（value）**，即它们所表示的数据内容是否相等。
+
+* **小整数缓存（Integer Caching）/字符串驻留（String Interning）：**
+    Python 解释器为了优化性能，会对一些常用的、不可变的对象（如小整数：通常是 -5 到 256 之间的整数；短字符串）进行缓存或驻留。这意味着在这些范围内的相同值可能实际上指向同一个内存对象。超出这个范围，即使值相同，也可能创建不同的对象。
+
+**示例：**
+
+```python
+# 比较整数
+a = 10
+b = 10
+c = 20
+
+print(f"{a} is {b} 结果: {a is b}") # 输出: True (因为 10 在小整数缓存范围内)
+print(f"{a} == {b} 结果: {a == b}") # 输出: True
+
+print(f"{a} is {c} 结果: {a is c}") # 输出: False
+print(f"{a} == {c} 结果: {a == c}") # 输出: False
+
+# 比较超出缓存范围的整数
+x = 300
+y = 300
+print(f"{x} is {y} 结果: {x is y}") # 输出: False (通常情况下，因为 300 超出缓存范围，会创建两个不同的对象)
+print(f"{x} == {y} 结果: {x == y}") # 输出: True
+
+# 比较字符串
+str1 = "hello"
+str2 = "hello"
+str3 = "world"
+
+print(f"'{str1}' is '{str2}' 结果: {str1 is str2}") # 输出: True (短字符串通常会被驻留，指向同一个对象)
+print(f"'{str1}' == '{str2}' 结果: {str1 == str2}") # 输出: True
+
+str4 = "这是一个比较长的字符串，可能不会被驻留"
+str5 = "这是一个比较长的字符串，可能不会被驻留"
+print(f"'{str4}' is '{str5}' 结果: {str4 is str5}") # 输出: False (长字符串通常不会被驻留，除非是字面量或由编译器优化)
+print(f"'{str4}' == '{str5}' 结果: {str4 == str5}") # 输出: True
+
+# 比较列表 (可变对象，通常总是创建新对象)
+list1 = [1, 2, 3]
+list2 = [1, 2, 3]
+list3 = list1 # list3 引用了 list1 指向的同一个对象
+
+print(f"{list1} is {list2} 结果: {list1 is list2}") # 输出: False (两个不同的列表对象，即使值相同)
+print(f"{list1} == {list2} 结果: {list1 == list2}") # 输出: True (值相等)
+
+print(f"{list1} is {list3} 结果: {list1 is list3}") # 输出: True (它们引用了同一个对象)
+print(f"{list1} == {list3} 结果: {list1 == list3}") # 输出: True
+
+# 比较 None
+# None 在 Python 中是唯一的单例对象
+val_none = None
+another_none = None
+print(f"{val_none} is {another_none} 结果: {val_none is another_none}") # 输出: True
+print(f"{val_none} == {another_none} 结果: {val_none == another_none}") # 输出: True
+
+# 检查布尔值
+bool1 = True
+bool2 = True
+bool3 = False
+print(f"{bool1} is {bool2} 结果: {bool1 is bool2}") # 输出: True (True 和 False 也是单例对象)
+print(f"{bool1} is {bool3} 结果: {bool1 is bool3}") # 输出: False
+```
+
+#### 2.2 身份非运算符 (`is not`)
+
+`is not` 运算符是 `is` 运算符的反义。它用于检查左侧的操作数和右侧的操作数是否 **不** 指向内存中的同一个对象。如果它们不是同一个对象，则返回 `True`；否则，返回 `False`。
+
+**语法：** `object1 is not object2`
+
+**示例：**
+
+```python
+list_a = [1, 2]
+list_b = [1, 2]
+list_c = list_a
+
+print(f"{list_a} is not {list_b} 结果: {list_a is not list_b}") # 输出: True (是两个不同的对象)
+print(f"{list_a} is not {list_c} 结果: {list_a is not list_c}") # 输出: False (是同一个对象)
+
+# 结合 None
+user_input = None
+if user_input is not None:
+    print("用户输入了内容。")
+else:
+    print("用户输入为空。")
+```
+
+### 3. 应用场景
+
+`is` 和 `is not` 运算符在以下场景中特别有用：
+
+* **检查是否为 `None`：** 这是 `is` 运算符最常见的用法。由于 `None` 是一个单例对象，始终推荐使用 `is None` 和 `is not None` 来检查变量是否为空，而不是 `== None`。
+    ```python
+    my_variable = None
+    if my_variable is None:
+        print("变量为空。")
+    ```
+
+* **判断两个变量是否引用同一个可变对象：** 当你想确保对一个变量的修改也会影响到另一个变量时，或者想避免意外修改共享对象时，使用 `is` 可以进行精确判断。
+    ```python
+    data1 = [10, 20]
+    data2 = data1 # data2 和 data1 引用同一个列表对象
+    data3 = [10, 20] # data3 是一个新的列表对象
+    
+    print(data1 is data2) # True
+    print(data1 is data3) # False
+    
+    data1.append(30)
+    print(data2) # 输出: [10, 20, 30] (data2 也变了，因为它们是同一个对象)
+    print(data3) # 输出: [10, 20] (data3 没变)
+    ```
+
+* **性能考虑（对于单例对象）：** 对于像 `None`, `True`, `False` 和小整数这样的单例或缓存对象，`is` 运算符比 `==` 运算符通常效率更高，因为它只需要比较内存地址，而 `==` 可能需要执行更复杂的比较逻辑（取决于对象的 `__eq__` 方法）。
+
+### 4. `id()` 函数
+
+Python 提供了一个内置函数 `id()`，它可以返回对象的“身份”值，这个值通常是对象在内存中的地址。你可以使用 `id()` 来直观地理解 `is` 运算符的工作原理。
+
+**示例：**
+
+```python
+list_a = [1, 2, 3]
+list_b = [1, 2, 3]
+list_c = list_a
+
+print(f"id(list_a): {id(list_a)}")
+print(f"id(list_b): {id(list_b)}")
+print(f"id(list_c): {id(list_c)}")
+
+print(f"list_a is list_b: {list_a is list_b}") # False，id 不同
+print(f"list_a is list_c: {list_a is list_c}") # True，id 相同
+```
+
+**注意：** `id()` 返回的身份值在程序的整个生命周期内是唯一的（对于活动的同一对象而言），但不同次运行程序时可能会不同。
+好的，这是一份关于如何在 Python 中使用 `input()` 函数获取用户输入的教程，不包含总结和练习部分。
+
+## `input()` 函数：获取用户输入
+
+在交互式程序中，从用户那里获取数据是非常常见的需求。Python 的内置函数 `input()` 专门用于实现这一功能，它允许程序在运行时暂停，等待用户在控制台中键入内容并按回车。
+
+### 1. `input()` 函数的基本用法
+
+`input()` 函数会从标准输入（通常是键盘）读取一行文本，直到遇到换行符（用户按下回车键）。它总是将读取到的内容作为 **字符串** 返回。
+
+**语法：** `input([prompt])`
+
+* `prompt` (可选参数)：一个字符串，作为提示信息显示给用户。这个提示会在用户输入之前打印到控制台，告诉用户需要输入什么。
+
+**示例 1：最简单的用法**
+
+```python
+# 程序会暂停，等待用户输入
+user_data = input()
+print(f"您输入了: {user_data}")
+```
+
+当你运行这段代码时，控制台会显示一个光标，等待你输入。输入“Hello World”并按回车后，输出会是：
+
+```
+Hello World
+您输入了: Hello World
+```
+
+**示例 2：带提示信息的用法**
+
+为了让用户知道需要输入什么，通常会提供一个提示信息。
+
+```python
+name = input("请输入您的名字: ")
+print(f"您好, {name}!")
+```
+
+运行这段代码：
+
+```
+请输入您的名字: Alice
+您好, Alice!
+```
+
+**示例 3：获取数字输入并进行转换**
+
+正如之前数据类型转换教程中提到的，`input()` 总是返回字符串。如果需要获取数字进行计算，就必须进行类型转换。
+
+```python
+# 获取用户的年龄
+age_str = input("请输入您的年龄: ")
+
+# 将字符串转换为整数
+# 注意：如果用户输入了非数字字符，这里会发生 ValueError
+try:
+    age_int = int(age_str)
+    print(f"您的年龄是: {age_int} 岁。")
+    print(f"再过一年您将是: {age_int + 1} 岁。")
+except ValueError:
+    print("输入的年龄无效，请确保输入的是一个整数。")
+
+# 获取用户的身高（可能是浮点数）
+height_str = input("请输入您的身高（米）: ")
+try:
+    height_float = float(height_str)
+    print(f"您的身高是: {height_float} 米。")
+except ValueError:
+    print("输入的身高无效，请确保输入的是一个数字。")
+```
+
+### 2. `input()` 函数的特点和注意事项
+
+* **返回值总是字符串：** 这是最重要的特点。即使你输入了数字 `123`，`input()` 返回的也是字符串 `"123"`。
+* **阻塞程序执行：** `input()` 函数会暂停程序的执行，直到用户输入内容并按下 `Enter` 键。
+* **不接受参数作为实际输入：** `input()` 函数的参数只是一个提示，它本身不会作为用户输入的一部分被读取。
+* **错误处理：** 当你期望用户输入特定类型的数据（如整数、浮点数）时，最好使用 `try-except` 块来处理 `ValueError`，以防止用户输入不符合预期的数据类型而导致程序崩溃。
+
+### 3. 多次获取用户输入
+
+你可以在程序中多次使用 `input()` 来获取不同的信息。
+
+**示例 4：获取多个用户信息**
+
+```python
+print("请填写以下信息：")
+full_name = input("姓名: ")
+email = input("邮箱: ")
+phone = input("电话: ")
+
+print("\n--- 您的信息摘要 ---")
+print(f"姓名: {full_name}")
+print(f"邮箱: {email}")
+print(f"电话: {phone}")
+```
+
+### 4. 结合 `if` 语句和循环
+
+`input()` 函数经常与条件语句 (`if`/`elif`/`else`) 和循环 (`while`) 结合使用，以创建更复杂的交互式程序。
+
+**示例 5：简单的命令行选择**
+
+```python
+while True:
+    command = input("请输入命令 ('开始', '停止', '退出'): ").lower() # 将输入转换为小写方便比较
+
+    if command == "开始":
+        print("程序已启动。")
+    elif command == "停止":
+        print("程序已停止。")
+    elif command == "退出":
+        print("程序已退出。")
+        break # 退出循环
+    else:
+        print("无效命令，请重新输入。")
+```
+
+这个例子展示了如何在一个无限循环中反复获取用户输入，并根据输入执行不同的操作，直到用户输入“退出”才结束。
+好的，这是一份关于如何在 Python 中使用 `print()` 函数输出结果的教程。
+
+## `print()` 函数
+
+在编程中，将信息显示给用户或在调试时查看变量的值是必不可少的。Python 的内置函数 `print()` 就是为此目的而生，它是你学习 Python 时最早接触也最常用的函数之一。
+
+### 1. `print()` 函数的基本用法
+
+`print()` 函数最简单的用法是直接在括号内放入你想要输出的内容。它会将内容显示到标准输出（通常是控制台或终端），并在输出末尾自动添加一个换行符。
+
+**语法：** `print(*objects, sep=' ', end='\n', file=sys.stdout, flush=False)`
+
+虽然 `print()` 有多个参数，但我们先从最常用的开始。
+
+#### 1.1 输出单个值
+
+你可以打印数字、字符串、变量等任何类型的值。
+
+**示例 1：**
+
+```python
+print("Hello, Python!") # 输出字符串
+print(123)            # 输出整数
+print(3.14159)        # 输出浮点数
+
+name = "Alice"
+age = 30
+print(name)           # 输出变量的值
+print(age)            # 输出变量的值
+```
+
+运行这些代码会得到以下输出：
+
+```
+Hello, Python!
+123
+3.14159
+Alice
+30
+```
+
+#### 1.2 输出多个值
+
+`print()` 函数可以接受多个值作为参数，它们之间用逗号 `,` 分隔。默认情况下，这些值之间会用一个空格作为分隔符。
+
+**示例 2：**
+
+```python
+print("My name is", name, "and I am", age, "years old.")
+# 输出: My name is Alice and I am 30 years old.
+
+city = "New York"
+temp = 25.5
+print("Current city:", city, "Temperature:", temp, "degrees Celsius.")
+# 输出: Current city: New York Temperature: 25.5 degrees Celsius.
+```
+
+### 2. `print()` 函数的常用参数
+
+`print()` 函数的强大之处在于它的可选参数，它们允许你更精细地控制输出格式。
+
+---
+
+#### 2.1 `sep` 参数 (Separator)
+
+`sep` 参数用于指定在打印多个值时，它们之间使用的分隔符。默认值是单个空格 `' '`。
+
+**示例 3：**
+
+```python
+print("apple", "banana", "cherry")         # 默认分隔符是空格
+# 输出: apple banana cherry
+
+print("apple", "banana", "cherry", sep="-") # 使用连字符作为分隔符
+# 输出: apple-banana-cherry
+
+print("192", "168", "1", "1", sep=".")     # 打印 IP 地址
+# 输出: 192.168.1.1
+
+date_day = 10
+date_month = 6
+date_year = 2025
+print(date_year, date_month, date_day, sep="/") # 打印日期
+# 输出: 2025/6/10
+```
+
+---
+
+#### 2.2 `end` 参数 (End)
+
+`end` 参数用于指定 `print()` 函数在输出所有内容后，在末尾添加的字符。默认值是换行符 `'\n'`。通过改变 `end` 的值，你可以控制连续的 `print()` 语句是否在新的一行开始。
+
+**示例 4：**
+
+```python
+print("This is the first line.")
+print("This is the second line.")
+# 默认情况下，每次 print 都会换行
+
+print("Hello", end=" ") # 不换行，以空格结尾
+print("World!")         # 接着上面的 "Hello " 后面打印
+# 输出: Hello World!
+
+print("Counting: ", end="")
+for i in range(1, 6):
+    print(i, end="...") # 每次打印一个数字，后面跟着 "..."
+print("Done!")         # 最后打印 Done! 并换行
+# 输出: Counting: 1...2...3...4...5...Done!
+```
+
+---
+
+### 3. 使用 F-string (格式化字符串字面量) 进行输出
+
+从 Python 3.6 开始，**F-string (Formatted String Literals)** 是推荐的字符串格式化方法，它提供了一种简洁易读的方式来嵌入表达式。F-string 以 `f` 或 `F` 开头，后面跟着一个字符串，其中可以包含用花括号 `{}` 包裹的表达式。
+
+F-string 不仅仅是 `print()` 函数的参数，它是一种字符串本身。但它与 `print()` 结合使用时效果最佳。
+
+**示例 5：**
+
+```python
+item = "Laptop"
+price = 1200
+quantity = 2
+
+# 传统字符串拼接（不推荐，可读性差）
+# print("The " + item + " costs " + str(price) + " and we have " + str(quantity) + " in stock.")
+
+# 使用 F-string
+print(f"The {item} costs ${price} and we have {quantity} in stock.")
+# 输出: The Laptop costs $1200 and we have 2 in stock.
+
+total_cost = price * quantity
+print(f"Total cost for {quantity} {item}s: ${total_cost}.")
+# 输出: Total cost for 2 Laptops: $2400.
+
+# F-string 中可以直接进行表达式计算
+print(f"Next year, {name} will be {age + 1} years old.")
+# 输出: Next year, Alice will be 31 years old.
+
+# F-string 中可以使用格式化说明符
+pi = 3.1415926535
+print(f"Pi to 2 decimal places: {pi:.2f}") # .2f 表示保留两位小数的浮点数
+# 输出: Pi to 2 decimal places: 3.14
+
+percentage = 0.75
+print(f"Completion: {percentage:.0%}") # .0% 表示不带小数的百分比
+# 输出: Completion: 75%
+```
+
+F-string 是目前最推荐的字符串格式化方式，因为它既简洁又强大，并且易于阅读。
+
+---
+
+### 4. 其他不常用参数 (了解即可)
+
+* **`file` 参数：** 默认情况下，`print()` 函数会将输出发送到标准输出流 (`sys.stdout`)。你可以通过 `file` 参数将其重定向到任何文件对象，例如写入一个文件。
+    ```python
+    import sys
+    
+    # 打印到文件 (而不是控制台)
+    with open("output.txt", "w") as f:
+        print("This message will be written to output.txt", file=f)
+    print("This message goes to console.")
+    ```
+
+* **`flush` 参数：** 默认情况下，`print()` 函数的输出通常是缓冲的，这意味着它不会立即显示在屏幕上，而是在缓冲区满了或者程序结束时才一次性显示。将 `flush` 设置为 `True` 会强制立即清空缓冲区，使内容立即显示。这在实时进度更新或调试时可能有用。
+    ```python
+    import time
+    
+    print("Starting countdown: ", end="", flush=True)
+    for i in range(5, 0, -1):
+        print(i, end=" ", flush=True)
+        time.sleep(0.5) # 暂停 0.5 秒
+    print("Lift off!")
+    ```
+
+
+好的，这是一份关于 `print()` 函数的格式化输出教程，重点讲解 f-strings 和 `.format()` 方法。
+
+## f-strings 与 `.format()`
+
+在 Python 中，仅仅打印变量的值通常是不够的。我们经常需要将变量值嵌入到预定义的文本中，并以特定的格式（如小数位数、对齐方式、千位分隔符等）显示它们。Python 提供了多种字符串格式化方法，其中 f-strings 和 `.format()` 方法是目前最常用和推荐的两种。
+
+### 1. 为什么需要格式化输出？
+
+* **可读性：** 使输出信息更清晰、更易于人类阅读。
+* **一致性：** 确保数字、日期等以统一的格式显示。
+* **数据呈现：** 满足特定报告或界面对数据格式的要求。
+* **调试：** 在打印变量时包含上下文信息，有助于快速定位问题。
+
+### 2. F-strings (格式化字符串字面量) - Python 3.6+ 推荐
+
+F-strings 是从 Python 3.6 版本引入的一种字符串格式化方式，它以其简洁、强大和高性能而迅速成为最受欢迎的方法。
+
+**语法：** 在字符串前加上 `f` 或 `F`，然后用花括号 `{}` 包裹你想要嵌入的变量或表达式。
+
+#### 2.1 基本用法：嵌入变量和表达式
+
+```python
+name = "Alice"
+age = 30
+salary = 5000.75
+
+# 嵌入变量
+print(f"My name is {name} and I am {age} years old.")
+# 输出: My name is Alice and I am 30 years old.
+
+# 嵌入表达式
+print(f"Next year, {name} will be {age + 1} years old.")
+# 输出: Next year, Alice will be 31 years old.
+
+# 可以直接进行简单的运算
+print(f"Monthly salary: ${salary}, Annual salary: ${salary * 12}.")
+# 输出: Monthly salary: $5000.75, Annual salary: $60009.0.
+
+# 嵌入函数调用
+print(f"Name in uppercase: {name.upper()}")
+# 输出: Name in uppercase: ALICE
+```
+
+#### 2.2 格式化说明符 (Format Specifiers)
+
+F-strings 的强大之处在于可以在花括号内使用“格式化迷你语言”（Format Specification Mini-Language）来控制输出的格式。格式化说明符位于冒号 `:` 之后。
+
+**通用格式：** `{value:format_specifier}`
+
+**常用格式说明符：**
+
+* **精度和浮点数：**
+    * `.nf`: 保留 `n` 位小数的浮点数。
+    * `%`: 百分比格式。
+
+    ```python
+    pi = 3.1415926535
+    print(f"Pi (2 decimal places): {pi:.2f}")  # 输出: Pi (2 decimal places): 3.14
+    print(f"Pi (4 decimal places): {pi:.4f}")  # 输出: Pi (4 decimal places): 3.1416 (四舍五入)
+    
+    progress = 0.857
+    print(f"Progress: {progress:.2%}")         # 输出: Progress: 85.70%
+    print(f"Progress (no decimals): {progress:.0%}") # 输出: Progress (no decimals): 86%
+    ```
+
+* **对齐和填充：**
+    * `<`: 左对齐
+    * `>`: 右对齐
+    * `^`: 居中对齐
+    * `width`: 总宽度
+    * `fill_char`: 填充字符 (默认为空格，`fill_char` 必须在对齐符号之前)
+
+    ```python
+    item = "Book"
+    price = 25.99
+    
+    print(f"|{item:<10}|{price:>10.2f}|") # 左对齐 item (10宽), 右对齐 price (10宽, 2小数)
+    # 输出: |Book      |     25.99|
+    
+    print(f"|{item:^10}|{price:^10.2f}|") # 居中对齐
+    # 输出: |   Book   |   25.99  |
+    
+    # 使用填充字符
+    print(f"|{item:*^10}|") # 以 '*' 填充，居中对齐，总宽 10
+    # 输出: |***Book***|
+    ```
+
+* **数字格式：**
+    * `d`: 整数 (decimal)
+    * `f`: 浮点数 (float)
+    * `,` (逗号): 千位分隔符
+
+    ```python
+    large_number = 123456789
+    print(f"Large number: {large_number:,}") # 输出: Large number: 123,456,789
+    
+    balance = 1234.56
+    print(f"Balance: ${balance:,.2f}") # 输出: Balance: $1,234.56
+    ```
+
+* **不同进制：**
+    * `b`: 二进制
+    * `o`: 八进制
+    * `x` / `X`: 十六进制 (小写/大写)
+
+    ```python
+    num = 255
+    print(f"Decimal: {num}")         # 输出: Decimal: 255
+    print(f"Binary: {num:b}")        # 输出: Binary: 11111111
+    print(f"Octal: {num:o}")         # 输出: Octal: 377
+    print(f"Hexadecimal: {num:x}")   # 输出: Hexadecimal: ff
+    print(f"Hexadecimal (upper): {num:X}") # 输出: Hexadecimal (upper): FF
+    ```
+
+* **显示符号：**
+    * `+`: 始终显示符号（正数显示 `+`，负数显示 `-`）
+    * ` `: 正数前加空格，负数前加 `-`
+
+    ```python
+    pos_num = 10
+    neg_num = -5
+    print(f"Positive: {pos_num:+d}, Negative: {neg_num:+d}") # 输出: Positive: +10, Negative: -5
+    print(f"Positive: {pos_num: d}, Negative: {neg_num: d}") # 输出: Positive:  10, Negative: -5
+    ```
+
+#### 2.3 F-string 的调试功能 (Python 3.8+)
+
+从 Python 3.8 开始，f-strings 提供了方便的调试功能，通过在变量名后添加 `=` 来同时打印变量名和其值。
+
+```python
+user = "Bob"
+age = 42
+
+print(f"{user=}")   # 输出: user='Bob'
+print(f"{age=}")    # 输出: age=42
+
+# 结合其他格式化
+price = 99.99
+print(f"{price=:.2f}") # 输出: price=99.99
+```
+
+### 3. `.format()` 方法 (Python 2.6+ 推荐)
+
+`.format()` 方法是 f-strings 之前最推荐的格式化字符串的方式。它也使用花括号 `{}` 作为占位符，但变量或值是在 `.format()` 方法中作为参数传入的。
+
+**语法：** `string.format(value1, value2, ...)`
+
+#### 3.1 位置参数格式化
+
+按传入 `.format()` 方法的顺序对应占位符 `{}`。
+
+```python
+item = "Monitor"
+price = 300
+print("The {} costs ${}.".format(item, price))
+# 输出: The Monitor costs $300.
+
+# 可以通过索引指定位置
+print("The {1} costs ${0}.".format(price, item)) # {1} 对应 item, {0} 对应 price
+# 输出: The Monitor costs $300.
+```
+
+#### 3.2 关键字参数格式化
+
+通过在占位符中指定关键字名称，并在 `.format()` 方法中以关键字参数的形式传入。这提高了可读性，尤其是在有多个参数时。
+
+```python
+print("My name is {name} and I am {age} years old.".format(name="David", age=25))
+# 输出: My name is David and I am 25 years old.
+
+# 结合位置参数和关键字参数 (关键字参数必须在位置参数之后)
+print("Product: {0}, Quantity: {qty}, Price: {price}.".format("Keyboard", qty=5, price=75.50))
+# 输出: Product: Keyboard, Quantity: 5, Price: 75.5.
+```
+
+#### 3.3 格式化说明符 (`.format()` 版)
+
+`.format()` 方法也支持与 f-strings 相同的格式化迷你语言。格式化说明符同样在冒号 `:` 之后。
+
+```python
+pi = 3.1415926535
+print("Pi (2 decimal places): {:.2f}".format(pi))
+# 输出: Pi (2 decimal places): 3.14
+
+large_num = 987654321
+print("Large number with comma: {:,}".format(large_num))
+# 输出: Large number with comma: 987,654,321
+
+width = 15
+value = "Center"
+print("|{:^15}|".format(value)) # 居中对齐，总宽 15
+# 输出: |   Center      |
+
+percentage = 0.45
+print("Completion: {:.0%}".format(percentage))
+# 输出: Completion: 45%
+```
+
+### 4. 选择哪种格式化方法？
+
+* **推荐：F-strings (Python 3.6+)**
+    * **优点：** 最简洁、最直观、性能最好。直接在字符串中嵌入变量和表达式，所见即所得。
+    * **缺点：** 仅适用于 Python 3.6 及更高版本。
+    * **场景：** 大多数新项目和支持 Python 3.6+ 的环境。
+
+* **良好选择：`.format()` 方法**
+    * **优点：** 兼容性好（Python 2.6+），功能强大，可读性也不错。
+    * **缺点：** 相比 f-strings 稍微啰嗦一些，需要分别定义字符串和参数。
+    * **场景：** 需要兼容旧版 Python 的项目，或者个人偏好。
+
+* **不推荐 (了解即可)：`%` 运算符 (旧式格式化)**
+    * **优点：** 最古老的格式化方式，兼容所有 Python 版本。
+    * **缺点：** 语法复杂，容易出错，可读性差，不如 f-strings 和 `.format()` 灵活。
+    * **场景：** 维护非常老的 Python 2 代码。
+
+    ```python
+    # 示例: % 运算符 (不推荐在新代码中使用)
+    name = "Charlie"
+    age = 40
+    print("My name is %s and I am %d years old." % (name, age))
+    # %s 用于字符串，%d 用于整数
+    ```
+
+总之，对于现代 Python 开发，强烈推荐使用 **f-strings** 进行字符串格式化。如果需要考虑旧版本兼容性，`.format()` 方法是一个很好的替代方案。
+
+---
