@@ -1,0 +1,6 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+Answer questions based on the current project's documentation. If no relevant content is found, use tools to search the Internet or use context7 tools and combine AI's own knowledge to answer, and add the actual content to the project's documentation (you can create a new file or write content)
