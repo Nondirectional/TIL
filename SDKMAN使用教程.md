@@ -1,10 +1,118 @@
 # SDKMAN! 使用教程
 
 > 参考：[SDKMAN! Usage Documentation](https://sdkman.io/usage#latest-stable)
+> 
+> 安装参考：[SDKMAN! Installation](https://sdkman.io/install/)
 
 ## 什么是 SDKMAN!
 
 SDKMAN! (Software Development Kit Manager) 是一个用于管理多个软件开发工具版本的工具，特别适用于管理 Java、Kotlin、Scala、Groovy 等 JVM 生态系统的工具。
+
+## 安装 SDKMAN!
+
+### 基本安装（Linux/macOS/WSL）
+
+SDKMAN! 在 UNIX 系统上安装非常简单，支持 macOS、Linux 和 Windows（通过 WSL）。兼容 Bash 和 ZSH shell。
+
+启动新终端并输入以下命令：
+
+```bash
+curl -s "https://get.sdkman.io" | bash
+```
+
+按照屏幕上的说明完成安装。之后，打开新终端或在同一 shell 中运行：
+
+```bash
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+```
+
+最后，运行以下命令确认安装成功：
+
+```bash
+sdk version
+```
+
+您应该看到包含最新脚本和原生版本的输出：
+
+```
+SDKMAN!
+script: 5.19.0
+native: 0.5.0
+```
+
+### Windows 安装
+
+对于 Windows，有两种安装方式：
+
+#### 1. WSL 方式（推荐）
+安装 Windows 子系统 Linux (WSL) 后再安装 SDKMAN!。需要基本工具集（bash、zip、unzip、curl）。大多数情况下开箱即用。
+
+#### 2. Git Bash 方式
+如果使用 Git Bash for Windows，需要补充 MinGW 以获得 SDKMAN 所需的工具集。这种方式存在一些问题，但大部分情况下可以正常工作。
+
+> **注意**：SDKMAN! 需要 bash 环境才能运行。在 Windows 上无法原生安装，需要 WSL 或 MSYS+MinGW。不再支持 Cygwin。
+
+### 测试版频道
+
+要退出测试版频道，只需在 `~/.sdkman/etc/config` 中将 `sdkman_beta_channel` 设置为 false，然后运行：
+
+```bash
+sdk selfupdate force
+```
+
+### 卸载 SDKMAN!
+
+以下是从系统中删除 SDKMAN! 的步骤：
+
+1. 可选：备份并删除安装目录：
+```bash
+tar zcvf ~/sdkman-backup_$(date +%F-%kh%M).tar.gz -C ~/ .sdkman
+rm -rf ~/.sdkman
+```
+
+2. 从 shell 配置中删除初始化代码片段。编辑并删除 `.bashrc`、`.bash_profile` 和/或 `.profile` 文件中的初始化代码片段。如果使用 ZSH，请从 `.zshrc` 文件中删除。要删除的代码片段如下所示：
+```bash
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+[[ -s "/home/dudette/.sdkman/bin/sdkman-init.sh" ]] && source "/home/dudette/.sdkman/bin/sdkman-init.sh"
+```
+
+删除后，您已成功从机器上卸载 SDKMAN!。
+
+### 自定义位置安装
+
+如果要将 SDKMAN! 安装到自定义位置，如 `/usr/local/sdkman`，请确保您拥有完全访问权限且该文件夹不存在。在安装前导出 `SDKMAN_DIR`：
+
+```bash
+export SDKMAN_DIR="/usr/local/sdkman" && curl -s "https://get.sdkman.io" | bash
+```
+
+### 不修改 shell 配置的安装
+
+对于不适合修改 shell 配置的 CI 安装，在下载安装程序时添加 `rcupdate=false` 参数：
+
+```bash
+curl -s "https://get.sdkman.io?rcupdate=false" | bash
+```
+
+### CI 模式
+
+对于 CI/CD 流水线等自动化环境，SDKMAN! 提供专用的 CI 模式，优化非交互式使用的安装：
+
+```bash
+curl -s "https://get.sdkman.io?ci=true" | bash
+```
+
+CI 模式自动：
+
+* 回答所有提示（设置 `sdkman_auto_answer=true`）
+* 禁用彩色输出以获得更清洁的日志（设置 `sdkman_colour_enable=false`）
+* 关闭自更新功能以防止意外更新（设置 `sdkman_selfupdate_feature=false`）
+
+您可以根据需要与其他参数组合使用：
+
+```bash
+curl -s "https://get.sdkman.io?ci=true&rcupdate=false" | bash
+```
 
 ## 基本操作
 
