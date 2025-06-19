@@ -82,3 +82,69 @@ $ source ~/.zshrc
   - 有效命令显示为绿色
   - 无效命令显示为红色
   - 字符串、路径等有不同颜色显示
+
+## 卸载 zsh
+
+### 1. 切换回默认 shell
+
+在卸载 zsh 之前，需要先将默认 shell 切换回 bash（或其他 shell）：
+
+```bash
+$ chsh -s /bin/bash
+```
+
+**注意**: 更改 shell 后需要重新登录才能生效。
+
+### 2. 卸载 Oh My Zsh
+
+如果安装了 Oh My Zsh，需要先卸载它：
+
+```bash
+$ uninstall_oh_my_zsh
+```
+
+或者手动删除 Oh My Zsh 目录：
+
+```bash
+$ rm -rf ~/.oh-my-zsh
+```
+
+### 3. 清理配置文件
+
+删除 zsh 相关的配置文件：
+
+```bash
+$ rm -f ~/.zshrc ~/.zshrc.bak ~/.zsh_history
+```
+
+### 4. 卸载 zsh 包
+
+使用包管理器卸载 zsh：
+
+```bash
+$ sudo apt remove zsh
+```
+
+如果要完全清理，包括配置文件：
+
+```bash
+$ sudo apt purge zsh
+```
+
+### 5. 验证卸载
+
+确认当前使用的 shell：
+
+```bash
+$ echo $SHELL
+```
+
+应该显示 `/bin/bash` 或其他非 zsh 的 shell。
+
+检查 zsh 是否已被卸载：
+
+```bash
+$ which zsh
+```
+
+如果卸载成功，应该没有输出或显示 "zsh not found"。
