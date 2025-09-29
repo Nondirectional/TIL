@@ -3,13 +3,13 @@
 安装zsh
 
 ```bash
-$ apt install zsh 
+apt install zsh 
 ```
 
 设置默认shell为zsh
 
 ```bash
-$ chsh -s $(which zsh)
+chsh -s $(which zsh)
 ```
 
 安装 oh my zsh
@@ -23,13 +23,13 @@ sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/ins
 ### 自动补全插件 (zsh-autosuggestions)
 
 ```bash
-$ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 ```
 
 ### 语法高亮插件 (zsh-syntax-highlighting)
 
 ```bash
-$ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 ```
 
 ### z 插件 (目录快速跳转)

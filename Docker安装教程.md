@@ -16,48 +16,36 @@ Docker是一个开源的容器化平台，允许您将应用程序及其依赖�
 ### 步骤1：更新系统包索引
 
 ```bash
-sudo apt update
+apt update
 ```
 
-### 步骤2：安装必要的依赖包
+### 步骤2：设置Docker的 `apt` 存储库
 
 ```bash
-sudo apt install -y apt-transport-https ca-certificates curl gnupg lsb-release
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
 ```
 
-**说明**：这些包是Docker安装所需的基础依赖：
-- `apt-transport-https`：允许apt通过HTTPS传输
-- `ca-certificates`：SSL证书验证
-- `curl`：下载工具
-- `gnupg`：GPG密钥管理
-- `lsb-release`：系统版本信息
+
 
 ### 步骤3：安装Docker和Docker Compose
 
 ```bash
-sudo apt install -y docker.io docker-compose-v2
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
-**说明**：
-- `docker.io`：Docker引擎
-- `docker-compose-v2`：现代版本的Docker Compose
-
-### 步骤4：启动Docker服务并设置开机自启
-
-```bash
-sudo systemctl start docker
-sudo systemctl enable docker
-```
-
-### 步骤5：将用户添加到docker组
-
-```bash
-sudo usermod -aG docker $USER
-```
-
-**重要**：执行此命令后，需要注销并重新登录，或重启系统使组权限生效。
-
-### 步骤6：验证安装
+### 步骤4：验证安装
 
 #### 检查Docker版本
 ```bash
