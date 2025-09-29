@@ -13,6 +13,7 @@ Docker是一个开源的容器化平台，允许您将应用程序及其依赖�
 
 ## 安装步骤
 
+c
 ### 步骤1：更新系统包索引
 
 ```bash
@@ -187,7 +188,7 @@ docker image prune
 docker system prune
 ```
 
-## 🔧 解决网络连接问题（重要！）
+## Docker镜像加速
 
 ### 问题症状
 如果您遇到以下错误：
@@ -239,6 +240,28 @@ sudo tee /etc/docker/daemon.json <<-'EOF'
 }
 EOF
 ```
+
+#### Docker Desktop for Windows (WSL2) 特别说明
+
+如果您使用的是 Docker Desktop for Windows，配置步骤略有不同：
+
+1. **WSL2 环境中配置**（推荐）：
+   ```bash
+   # 在 WSL2 Ubuntu 中执行
+   sudo mkdir -p /etc/docker
+   echo '{"registry-mirrors":["https://docker.m.daocloud.io","https://dockerproxy.com","https://mirror.baidubce.com","https://reg-mirror.qiniu.com"],"insecure-registries":[],"debug":false,"experimental":false,"log-driver":"json-file","log-opts":{"max-size":"10m","max-file":"3"}}' | sudo tee /etc/docker/daemon.json
+   ```
+
+2. **重启 Docker Desktop**：
+   - 在 Windows 系统托盘中右键点击 Docker Desktop 图标
+   - 选择 "Restart Docker Desktop"
+   - 或者在 Docker Desktop 设置中重启
+
+3. **验证配置**：
+   ```bash
+   docker pull hello-world
+   docker run hello-world
+   ```
 
 #### 网易云镜像加速器
 ```bash
