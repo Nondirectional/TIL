@@ -281,180 +281,22 @@ def batch_add(session: Session，records:list):
 
 ### 数据库迁移
 
-1. #### 安装依赖
+📁 **详细文档**：[Alembic 数据库迁移工具.md](./Alembic%20数据库迁移工具.md)
 
-```Bash
-pip install alembic
-```
+Alembic 是 SQLAlchemy 的官方数据库迁移工具，提供版本控制方式管理数据库模式变更。
 
-1. #### 初始化环境
-
-```Bash
-alembic init alembic
-```
-
-1. #### 编辑 alembic.ini 文件
-
-初始化环境时生成的 .ini 文件如下：
-
-```toml
-# A generic, single database configuration.
-# 通用的单一数据库配置。
-
-[alembic]
-# path to migration scripts
-# 迁移脚本的路径
-script_location = alembic
-
-# template used to generate migration files
-# 用于生成迁移文件的模板
-# file_template = %%(rev)s_%%(slug)s
-
-# sys.path path, will be prepended to sys.path if present.
-# defaults to the current working directory.
-# (new in 1.5.5)
-
-# sys.path 路径，如果存在，将被添加到 sys.path 之前。
-# 默认为当前工作目录。
-# 版本1.5.5中新增
-prepend_sys_path = .
-
-# timezone to use when rendering the date within the migration file
-# as well as the filename.
-# If specified, requires the python-dateutil library that can be
-# installed by adding `alembic[tz]` to the pip requirements
-# string value is passed to dateutil.tz.gettz()
-# leave blank for localtime
-
-# 在迁移文件中呈现日期以及文件名时要使用的时区。
-# 如果指定，则需要可以通过将 `alembic[tz]` 添加到 pip 要求来安装的 python-dateutil 库
-# 字符串值将传递给 dateutil.tz.gettz() 
-# 本地时间留空
-# timezone =
-
-# max length of characters to apply to the
-# "slug" field
-
-# 应用于“slug”字段的最大字符长度
-# truncate_slug_length = 40
-
-# set to 'true' to run the environment during
-# the 'revision' command, regardless of autogenerate
-
-# 设置为 'true' 以在 'revision' 命令期间运行环境，而无论是否自动生成
-# revision_environment = false
-
-# set to 'true' to allow .pyc and .pyo files without
-# a source .py file to be detected as revisions in the
-# versions/ directory
-
-# 设置为“true”以允许将没有源 .py 文件的 .pyc 和 .pyo 文件检测为 `versions/` 目录中的版本文件
-# sourceless = false
-
-# version location specification; This defaults
-# to ${script_location}/versions.  When using multiple version
-# directories, initial revisions must be specified with --version-path.
-# The path separator used here should be the separator specified by "version_path_separator" below.
-
-# 版本位置规范； 这默认为`${script_location}/versions`。 使用多个版本目录时，必须使用 --version-path 指定初始版本。
-# 这里使用的路径分隔符应该是下面“version_path_separator”指定的分隔符。
-# version_locations = %(here)s/bar:%(here)s/bat:${script_location}/versions
-
-# version path separator; As mentioned above, this is the character used to split
-# version_locations. The default within new alembic.ini files is "os", which uses os.pathsep.
-# If this key is omitted entirely, it falls back to the legacy behavior of splitting on spaces and/or commas.
-# Valid values for version_path_separator are:
-#
-# 版本路径分隔符； 如上所述，这是用于拆分 version_locations 的字符。 新 alembic.ini 文件中的默认值是“os”，它使用 os.pathsep。
-# 如果这个键被完全省略，它会退回到在空格和/或逗号上分割的传统行为。
-# version_path_separator 的有效值为：
-# 
-# version_path_separator = :
-# version_path_separator = ;
-# version_path_separator = space
-version_path_separator = os  # Use os.pathsep. Default configuration used for new projects. (使用 os.pathsep。 用于新项目的默认配置。)
-
-# the output encoding used when revision files
-# are written from script.py.mako
-# 从 script.py.mako 写入修订文件时使用的输出编码
-# output_encoding = utf-8
-
-; sqlalchemy.url = driver://user:pass@localhost/dbname
-sqlalchemy.url = postgresql://aaa:@localhost/test
-
-# [post_write_hooks]
-# This section defines scripts or Python functions that are run
-# on newly generated revision scripts.  See the documentation for further
-# detail and examples
-# 本节定义在新生成的修订脚本上运行的脚本或 Python 函数。 有关更多详细信息和示例，请参阅文档
-
-# format using "black" - use the console_scripts runner,
-# against the "black" entrypoint
-# 使用“black”格式 - 使用 console_scripts runner，针对“black”入口点
-# hooks = black
-# black.type = console_scripts
-# black.entrypoint = black
-# black.options = -l 79 REVISION_SCRIPT_FILENAME
-
-# Logging configuration
-# 日志记录配置
-[loggers]
-keys = root,sqlalchemy,alembic
-
-[handlers]
-keys = console
-
-[formatters]
-keys = generic
-
-[logger_root]
-level = WARN
-handlers = console
-qualname =
-
-[logger_sqlalchemy]
-level = WARN
-handlers =
-qualname = sqlalchemy.engine
-
-[logger_alembic]
-level = INFO
-handlers =
-qualname = alembic
-
-[handler_console]
-class = StreamHandler
-args = (sys.stderr,)
-level = NOTSET
-formatter = generic
-
-[formatter_generic]
-format = %(levelname)-5.5s [%(name)s] %(message)s
-datefmt = %H:%M:%S
-```
-
-1. #### 编辑 env.py 文件
-
-找到 **target_metadata** 变量，将其设置为你项目中**declarative_base**的实现。
-
-```python
-# add your model's MetaData object here
-# for 'autogenerate' support
-# from myapp import mymodel
-# target_metadata = mymodel.Base.metadata
-from database import Base
-target_metadata = Base.metadata
-```
-
-1. #### **生成迁移**
-
-```Bash
-alembic revision --autogenerate -m "Added account table"
-```
-
-1. #### 执行迁移
-
+**常用命令**：
 ```bash
+# 安装
+pip install alembic
+
+# 初始化
+alembic init alembic
+
+# 生成迁移
+alembic revision --autogenerate -m "描述变更"
+
+# 执行迁移
 alembic upgrade head
 ```
 

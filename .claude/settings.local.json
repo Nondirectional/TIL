@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "mcp__memory-bank__get-memory-bank-info",
+      "mcp__memory-bank__update-memory-bank"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
